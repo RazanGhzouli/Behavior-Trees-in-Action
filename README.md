@@ -6,13 +6,7 @@
 This is Appendix for the paper Behavior Trees in Action: A Study of Robotics Applications.
 
 ### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+Please refer to the folder artifact-evaluation to check how to run the scripts
 
 
 ### Who do I talk to? ###
