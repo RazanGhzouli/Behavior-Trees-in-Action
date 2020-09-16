@@ -1,0 +1,346 @@
+<root main_tree_to_execute="MainTree">
+
+    <BehaviorTree ID="MainTree">
+        <Sequence name="root">
+            <SubTree ID="ResetAX12"/>
+
+            <SubTree ID="PickAllYellowAtoms"/>
+            <SubTree ID="EmptyBarrelRight"/>
+            <SubTree ID="TakeChaos"/>
+
+        </Sequence>
+    </BehaviorTree>
+
+    <!--    Global subtrees-->
+
+    <BehaviorTree ID="ResetAX12">
+        <Sequence>
+            <MoveArmFront name="move arm to the back"
+                          pos="950"/>
+            <TurnArm name="turn arm to the center"
+                     pos="510"/>
+            <PushLeftAtom name="move arm to the back"
+                          pos="1000"/>
+            <PushRightAtom name="move arm to the back"
+                           pos="580"/>
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="PickAllPurpleAtoms">
+        <Sequence>
+            <!-- Move to atoms and adjust-->
+            <MoveAhead name="move ahead" distance="655"/>
+            <Turn name="turn to the left (to be backwards)" angle="-90"/>
+            <MoveAhead name="move ahead" distance="-142"/>
+            <Turn name="adjust" angle="-1"/>
+
+            <!-- Pick up atoms-->
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="-100"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="9535"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="-100"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="19070"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="-100"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="28605"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="-100"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="38140"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="-100"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="47675"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="720"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="57210"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+            <!-- Move forward to do a U-turn, then go back to drop the atoms -->
+
+            <Turn name="u turn"
+                  angle="181"/>
+            <MoveAhead name="move ahead"
+                       distance="920"/>
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="PickAllYellowAtoms">
+        <Sequence>
+            <!-- Move to atoms and adjust-->
+            <MoveAhead name="move ahead" distance="632"/>
+            <Turn name="turn to the left"
+                  angle="-90"/>
+            <MoveAhead name="move ahead" distance="258"/>
+            <Turn name="adjust" angle="-2"/>
+
+            <!-- Pick up atoms -->
+            <!--<SubTree ID="PickAtomRight"/> shitty pos -->
+
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="100"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="9535"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="100"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="19070"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="100"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="28605"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="100"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="38140"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <MoveAhead name="move ahead" distance="100"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="47675"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+
+            <SubTree ID="PickAtomRight"/>
+            <Parallel threshold="2">
+                <!-- Move to balance -->
+                <MoveAhead name="move ahead" distance="200"/>
+                <Sequence name="para">
+                    <SetBlackboard output_key="barrelGoalPosition" value="57210"/>
+                    <SubTree ID="TurnBarrel" barrelGoalPosition="barrelGoalPosition"/>
+                </Sequence>
+            </Parallel>
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="EmptyBarrelLeft">
+        <Sequence>
+            <SetBlackboard output_key="barrelGoalPosition" value="58340"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushLeft"/>
+            <SetBlackboard output_key="barrelGoalPosition" value="67875"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushLeft"/>
+            <SetBlackboard output_key="barrelGoalPosition" value="77410"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushLeft"/>
+            <SetBlackboard output_key="barrelGoalPosition" value="86945"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushLeft"/>
+            <SetBlackboard output_key="barrelGoalPosition" value="96480"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushLeft"/>
+            <SetBlackboard output_key="barrelGoalPosition" value="106015"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushLeft"/>
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="EmptyBarrelRight">
+        <Sequence>
+            <SetBlackboard output_key="barrelGoalPosition" value="65460"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushRight"/>
+            <SetBlackboard output_key="barrelGoalPosition" value="74845"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushRight"/>
+            <SetBlackboard output_key="barrelGoalPosition" value="84380"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushRight"/>
+            <SetBlackboard output_key="barrelGoalPosition" value="93915"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushRight"/>
+            <SetBlackboard output_key="barrelGoalPosition" value="103450"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushRight"/>
+            <SetBlackboard output_key="barrelGoalPosition" value="112985*"/>
+            <SubTree ID="TurnBarrel"
+                     barrelGoalPosition="barrelGoalPosition"/>
+            <SubTree ID="PushRight"/>
+        </Sequence>
+    </BehaviorTree>
+
+    <!--    Basic subtrees-->
+
+    <BehaviorTree ID="PickAtomLeft">
+        <!--   NOT UP TO DATE   -->
+
+        <Sequence>
+            <Wait delay="1000"/>
+            <!--            <MoveArmFront name="move arm to the back"-->
+            <!--                          pos="800"-->
+            <!--            />-->
+            <!--            <MoveArmSideJoint name="move arm to the center (joint mode)"-->
+            <!--                              pos="1023"-->
+            <!--            />-->
+            <!--            <TurnArm name="turn arm to the left"-->
+            <!--                     pos="200"-->
+            <!--            />-->
+
+            <!--            <MoveArmSideJoint name="move arm to the left (new joint mode)"-->
+            <!--                              pos="250"-->
+            <!--            />-->
+
+            <!--            <ActivatePump/>-->
+            <!--            <Wait name="wait for the atom to be stuck"-->
+            <!--                  delay="1000"/>-->
+
+            <!--            <MoveArmSideJoint name="move arm back to the center (joint mode)"-->
+            <!--                              pos="1023"-->
+            <!--            />-->
+
+            <!--            <TurnArm name="turn arm to the center"-->
+            <!--                     pos="510"-->
+            <!--            />-->
+            <!--            <MoveArmFront name="move arm to the front"-->
+            <!--                          pos="200"-->
+            <!--            />-->
+
+            <!--            <DeactivatePump/>-->
+            <!--            <Wait name="wait for the atom to fall"-->
+            <!--                  delay="500"/>-->
+
+            <!--            <MoveArmFront name="move arm to the back"-->
+            <!--                          pos="500"-->
+            <!--            />-->
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="PickAtomRight">
+        <Sequence>
+            <MoveArmFront name="move arm to the back" pos="950"/>
+
+            <MoveArmSideJoint name="move arm to the center (joint mode)" pos="235"/>
+            <TurnArm name="turn arm to the right" pos="820"/>
+
+            <MoveArmSideJoint name="move arm to the right (joint mode)" pos="1023"/>
+
+            <!--<ActivatePump/>-->
+            <Wait name="wait for the atom to be stuck" delay="500"/>
+
+            <MoveArmSideJoint name="move arm back to the center (joint mode)" pos="235"/>
+
+            <TurnArm name="turn arm to the center"
+                     pos="510"/>
+            <MoveArmFront name="move arm to the front" pos="460"/>
+
+            <!--<DeactivatePump/>-->
+            <Wait name="wait for the atom to fall" delay="1000"/>
+
+            <MoveArmFront name="move arm to the back" pos="950"/>
+
+            <Wait name="wait for the atom to fall" delay="500"/>
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="TurnBarrel">
+        <Sequence>
+            <ActivateBarrel name="start turning the barrel"/>
+            <RetryUntilSuccesful num_attempts="10000000">
+                <IsBarrelMoveFinished name="check if the barrel has turned enough"
+                                      goalPosition="{barrelGoalPosition}"/>
+            </RetryUntilSuccesful>
+            <DeactivateBarrel name="stop turning the barrel"/>
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="PushLeft">
+        <Sequence>
+            <PushLeftAtom name="push it"
+                          pos="530"/>
+            <PushLeftAtom name="come back"
+                          pos="1000"/>
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="PushRight">
+        <Sequence>
+            <!--<Wait name="visual" delay="2000"/>-->
+            <PushRightAtom name="push it" pos="1000"/>
+            <PushRightAtom name="come back" pos="580"/>
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="TakeChaos">
+        <Sequence>
+            <!--<MoveAhead name="move ahead" distance="632"/>
+            <Turn name="turn to the left" angle="-90"/>
+            <MoveAhead name="move ahead" distance="255"/>
+            <Turn name="adjust" angle="-1"/>
+            <MoveAhead name="move ahead" distance="700"/>-->
+            <Turn name="towards chaos" angle="-45"/>
+            <MoveAhead name="move ahead" distance="500"/>
+            <Turn name="towards chaos" angle="-137"/>
+            <MoveAhead name="move ahead" distance="1200"/>
+        </Sequence>
+    </BehaviorTree>
+
+</root>

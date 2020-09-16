@@ -1,0 +1,24 @@
+<root main_tree_to_execute="BehaviorTree">
+    <!--------------------------------------->
+    <BehaviorTree ID="BehaviorTree">
+        <Root>
+            <Fallback name="FB">
+                <Sequence name="S1">
+                    <Action ID="Go_to_kitchen"/>
+                    <Action ID="Find_bottle"/>
+                    <Action ID="Fetch_bottle"/>
+                </Sequence>
+                <Action ID="Ask_for_help"/>
+            </Fallback>
+        </Root>
+    </BehaviorTree>
+    <!--------------------------------------->
+    <TreeNodesModel>
+        <Action ID="Ask_for_help"/>
+        <Action ID="Fetch_bottle"/>
+        <Action ID="Find_bottle"/>
+        <Action ID="Go_to_kitchen"/>
+    </TreeNodesModel>
+    <!--------------------------------------->
+</root>
+

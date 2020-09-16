@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Parallel threshold="1">
+            <Repeat num_cycles="-1">
+                <Action ID="VariantAction" value="{variant}"/>
+            </Repeat>
+            <Sequence>
+                <Action ID="peoplerecognition"/>
+                <Action ID="moveRoboterPosition" approachRadius="200" x="5630" y="-12000"/>
+                <Switch2 case_1="one" case_2="two" variable="{variant}">
+                    <SubTree ID="Recharge"/>
+                    <SubTree ID="Recharge"/>
+                    <Fallback name="SearchThomas">
+                        <SubTree ID="SearchThomasRoom1"/>
+                        <SubTree ID="SearchThomasRoom2"/>
+                        <SubTree ID="Recharge"/>
+                    </Fallback>
+                </Switch2>
+            </Sequence>
+        </Parallel>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="Recharge">
+        <Sequence name="Recharge">
+            <Action ID="moveRoboterPosition" approachRadius="200" name="Door8" x="23200" y="-12000"/>
+            <Action ID="moveRoboterPosition" approachRadius="10" name="GotoCharger" x="23200" y="-14800"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="SearchThomasRoom1">
+        <Fallback name="Room1">
+            <Sequence name="SearchRoom1">
+                <Action ID="moveRoboterPosition" approachRadius="200" name="Door2" x="7520" y="-12000"/>
+                <Action ID="moveRoboterPosition" approachRadius="200" x="7520" y="-9040"/>
+                <Action ID="getPersonPose" personname="THOMAS" x="{x_}" y="{y_}" z="{z_}"/>
+                <Action ID="moveRoboterPosition" approachRadius="500" name="MoveToPerson" x="{x_}" y="{y_}"/>
+                <Action ID="moveRoboterPosition" approachRadius="200" name="Door2" x="7520" y="-12000"/>
+            </Sequence>
+            <ForceFailure>
+                <Action ID="moveRoboterPosition" approachRadius="200" name="Door2" x="7520" y="-12000"/>
+            </ForceFailure>
+        </Fallback>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="SearchThomasRoom2">
+        <Fallback name="Room4">
+            <Sequence name="SearchRoom4">
+                <Action ID="moveRoboterPosition" approachRadius="200" name="Door4" x="14500" y="-12000"/>
+                <Action ID="moveRoboterPosition" approachRadius="200" x="14400" y="-9640"/>
+                <Action ID="getPersonPose" personname="THOMAS" x="{x_}" y="{y_}" z="{z_}"/>
+                <Action ID="moveRoboterPosition" approachRadius="500" name="MoveToPerson" x="{x_}" y="{y_}"/>
+                <Action ID="moveRoboterPosition" approachRadius="200" name="Door4" x="14500" y="-12000"/>
+            </Sequence>
+            <ForceFailure>
+                <Action ID="moveRoboterPosition" approachRadius="200" name="Door4" x="14500" y="-12000"/>
+            </ForceFailure>
+        </Fallback>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <SubTree ID="Recharge"/>
+        <SubTree ID="SearchThomasRoom1"/>
+        <SubTree ID="SearchThomasRoom2"/>
+        <Action ID="VariantAction">
+            <output_port default="{variant}" name="value"/>
+        </Action>
+        <Action ID="activateLocalization"/>
+        <Action ID="approachLocation">
+            <input_port default="1" name="locationId"/>
+        </Action>
+        <Action ID="approachWall"/>
+        <Action ID="deactivateLocalization"/>
+        <Action ID="getBaseCharging">
+            <output_port default="{charging}" name="charging"/>
+        </Action>
+        <Action ID="getPersonPose">
+            <input_port default="MARIA" name="personname"/>
+            <output_port default="{x_}" name="x"/>
+            <output_port default="{y_}" name="y"/>
+            <output_port default="{z_}" name="z"/>
+        </Action>
+        <Action ID="initNavigation"/>
+        <Action ID="loadMap"/>
+        <Action ID="loadNavigationMap">
+            <input_port default="navigation-map" name="mapname"/>
+        </Action>
+        <Action ID="moveRoboterBackwardsLocation"/>
+        <Action ID="moveRoboterBackwardsRelative"/>
+        <Action ID="moveRoboterOrientateRobotAbs"/>
+        <Action ID="moveRoboterOrientateRobotRel"/>
+        <Action ID="moveRoboterPosition">
+            <input_port default="50" name="approachRadius"/>
+            <input_port default="0" name="x"/>
+            <input_port default="0" name="y"/>
+        </Action>
+        <Action ID="peoplerecognition"/>
+        <Action ID="setRobotPose">
+            <input_port default="0" name="x"/>
+            <input_port default="0" name="y"/>
+            <input_port default="0" name="yaw"/>
+        </Action>
+        <Action ID="startJoystickNavigation"/>
+        <Action ID="startReactiveNavigation"/>
+        <Action ID="stopJoystickNavigation"/>
+        <Action ID="stopReactiveNavigation"/>
+        <Action ID="triggerGlobalLocalization"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+

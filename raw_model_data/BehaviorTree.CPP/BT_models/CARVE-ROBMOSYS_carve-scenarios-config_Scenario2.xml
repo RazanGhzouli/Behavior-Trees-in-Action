@@ -1,0 +1,142 @@
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Fallback>
+            <Sequence>
+                <Fallback name="Reach Room">
+                    <Sequence>
+                        <Condition name="Kitchen Known" ID="LocationKnown" flag="known" target="kitchen"/>
+                        <Fallback>
+                            <Condition name="Robot In Kitchen" ID="IsRobotInRoom" target="kitchen"/>
+                            <Action name="Go To Kitchen" ID="GoToRoom_cl" serverPort="/navigation_module" target="kitchen"/>
+                        </Fallback>
+                    </Sequence>
+                    <Action name="Follow Human" ID="Follower_cl" serverPort="/follower"/>
+                </Fallback>
+                <Fallback name="Bottle Found">
+                    <Condition name="Bottle Found" ID="CheckCondition" serverPort="/blackboard" flag="found" target="bottle"/>
+                    <Action name="Find Bottle" ID="GoToLocation_cl" serverPort="/navigation_module" target="findBottle"/>
+                </Fallback>
+                <Fallback name="Fetch Bottle">
+                    <Condition name="Bottle Grasped" ID="ObjectGrasped" flag="grasped" target="bottle"/>
+                    <Sequence name="Grasp">
+                        <Fallback>
+                            <Sequence>
+                                <Condition ID="InvPoseComputed" flag="computed" target="InvPose"/>
+                                <Condition ID="InvPoseValid" flag="valid" target="InvPose"/>
+                            </Sequence>
+                            <Action name="Compute Inv Pose" ID="ComputePose_cl" serverPort="/ComputeInvPose" target="InvPose"/>
+                        </Fallback>
+                        <Fallback>
+                            <Condition name="Robot At InvPose" ID="IsRobotAtLocation" target="InvPose"/>
+                            <Sequence>
+                                <Action name="Raise Arms" ID="KeepArmsForGrasp_cl" serverPort="/GraspObject" target="homeArms"/>
+                                <Action name="Go To InvPose" ID="GoToLocation_cl" serverPort="/navigation_module" target="InvPose"/>
+                            </Sequence>
+                        </Fallback>
+                        <Action name="Grasp Bottle" resources="right" ID="GraspObject_cl" serverPort="/GraspObject" target="bottle"/>
+                        <Fallback>
+                            <Condition name="Bottle Located" ID="ObjectLocated" flag="located" target="bottle"/>
+                            <Action ID="LocateObject_cl" serverPort="/locate_bottle" target="bottle"/>
+                        </Fallback>
+                    </Sequence>
+                    <Action ID="Reset_InvPoseValid" serverPort="/blackboard" flag="valid" target="InvPose"/>
+                </Fallback>
+            </Sequence>
+            <Action name="AskForHelp" ID="AskForHelp_cl" serverPort="/AskForHelp"/>
+        </Fallback>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="AskForHelp_cl">
+            <input_port name="serverPort"> Name of the YARP port to connect to. </input_port>
+        </Action>
+        <Condition ID="CheckCondition">
+            <input_port name="flag">        Boolean condition to be checked on target.  </input_port>
+            <input_port name="serverPort">  Name of the YARP port to connect to.        </input_port>
+            <input_port name="target">      Name of the target to test.                 </input_port>
+        </Condition>
+        <Action ID="ComputePose_cl">
+            <input_port name="serverPort"> Name of the YARP port to connect to. </input_port>
+            <input_port name="target" default="InvPose"> Pose to compute </input_port>
+        </Action>
+        <Action ID="FindObject_cl">
+            <input_port name="serverPort"> Name of the YARP port to connect to. </input_port>
+            <input_port name="target"> Object to find </input_port>
+        </Action>
+        <Action ID="Follower_cl">
+            <input_port name="serverPort" default="/follower"> Name of the YARP port to connect to. </input_port>
+        </Action>
+        <Action ID="GoToLocation_cl">
+            <input_port name="serverPort" default="/navigation_module"> Name of the YARP port of the navigation server. </input_port>
+            <input_port name="target"> Name of the location to reach. </input_port>
+        </Action>
+        <Action ID="GoToRoom_cl">
+            <input_port name="serverPort" default="/navigation_module"> Name of the YARP port of the navigation server. </input_port>
+            <input_port name="target"> Name of the room to reach. </input_port>
+        </Action>
+        <Action ID="GraspObject_cl">
+            <input_port name="serverPort"> Name of the YARP port to connect to. </input_port>
+            <input_port name="target"> Object to grasp. </input_port>
+            <input_port name="resources"> Arm to use. </input_port>
+        </Action>
+        <Condition ID="InvPoseComputed">
+            <input_port name="flag" default="computed">             Is the Inverse Pose computed?                       </input_port>
+            <input_port name="target" default="InvPose">            Name of the check.                                  </input_port>
+        </Condition>
+        <Condition ID="InvPoseValid">
+            <input_port name="flag" default="valid">                Is the Inverse Pose valid?                          </input_port>
+            <input_port name="target" default="InvPose">            Name of the check.                                  </input_port>
+        </Condition>
+        <Action ID="KeepArmsForGrasp_cl">
+            <input_port name="serverPort" default="/moveJoints"> Name of the YARP port to connect to. </input_port>
+            <input_port name="target"> target position to reach, if any </input_port>
+        </Action>
+        <Action ID="LocateObject_cl">
+            <input_port name="serverPort"> Name of the YARP port to connect to. </input_port>
+            <input_port name="target"> Object to locate. </input_port>
+        </Action>
+        <Condition ID="LocationKnown">
+            <input_port name="flag" default="known">                Is the location/room known?                         </input_port>
+            <input_port name="target">                              Name of the location/room to test.                  </input_port>
+        </Condition>
+        <Condition ID="ObjectGrasped">
+            <input_port name="flag" default="grasped">              Is the target Object grasped?                       </input_port>
+            <input_port name="target">                              Name of the object.                                 </input_port>
+        </Condition>
+        <Condition ID="ObjectLocated">
+            <input_port name="flag" default="located">              Is the target Object located?                       </input_port>
+            <input_port name="target">                              Name of the object.                                 </input_port>
+        </Condition>
+        <Action ID="Reset_Condition">
+            <input_port name="flag">       Boolean condition to be set to False. </input_port>
+            <input_port name="serverPort" default="/blackboard"> Name of the YARP port to connect to.   </input_port>
+            <input_port name="target">     Target the condition is referred to. </input_port>
+        </Action>
+        <Action ID="Reset_InvPoseComputed">
+            <input_port name="flag" default="computed">  Set InvPose computed as false.         </input_port>
+            <input_port name="target" default="InvPose"> Change a propery of 'InvPose'.         </input_port>
+        </Action>
+        <Action ID="Reset_InvPoseValid">
+            <input_port name="flag" default="valid">      Set InvPose as Invalid.                </input_port>
+            <input_port name="serverPort" default="/blackboard">  Name of the YARP port to connect to.   </input_port>
+            <input_port name="target" default="InvPose">  Change a propery of 'InvPose'.         </input_port>
+        </Action>
+        <Condition ID="IsRobotAtLocation">
+            <input_port name="target">                              Name of the location.                               </input_port>
+        </Condition>
+        <Condition ID="IsRobotInRoom">
+            <input_port name="target">                              Name of the room.                                   </input_port>
+        </Condition>
+        <Action ID="Set_Condition">
+            <input_port name="flag">       Boolean condition to be set to True. </input_port>
+            <input_port name="target">     Target the condition is referred to. </input_port>
+        </Action>
+        <Action ID="YARP_tick_client">
+            <input_port name="serverPort">YARP port name to connect to. </input_port>
+            <input_port name="target">Name of the target this action is referring to, if any. </input_port>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+

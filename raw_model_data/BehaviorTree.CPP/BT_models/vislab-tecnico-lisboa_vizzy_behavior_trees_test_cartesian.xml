@@ -1,0 +1,103 @@
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <Action pose_array="poses" topic="poses" ID="GetPoseArray"/>
+            <Action pose_array="{poses}" pose_stamped="pose" position_in_list="0" ID="SelectPose"/>
+            <Action type="CARTESIAN" action_name="/vizzy/right_arm_cartesian_controller/cartesian_action" frame_id="base_footprint" pose="{pose}" ID="ArmCartesian"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="ArmCartesian">
+            <input_port name="action_name"/>
+            <input_port name="frame_id"/>
+            <input_port name="pose"/>
+            <input_port name="type"/>
+        </Action>
+        <Action ID="ArmRoutines">
+            <input_port name="gesture"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="Charge">
+            <input_port name="action"/>
+            <input_port name="action_name"/>
+        </Action>
+        <SubTree ID="ChargeST"/>
+        <Action ID="CheckBattery">
+            <output_port type="int" name="battery_state"/>
+            <output_port type="double" name="percentage"/>
+            <input_port type="std::string" name="service_name"/>
+        </Action>
+        <Condition ID="CheckBool">
+            <input_port name="variable"/>
+        </Condition>
+        <Action ID="CheckCharging">
+            <output_port type="int" name="charging_state"/>
+            <input_port type="std::string" name="service_name"/>
+        </Action>
+        <Condition ID="CompareDouble">
+            <input_port name="A"/>
+            <input_port name="B"/>
+            <input_port name="Condition"/>
+        </Condition>
+        <Condition ID="CompareInt">
+            <input_port name="A"/>
+            <input_port name="B"/>
+            <input_port name="Condition"/>
+        </Condition>
+        <Action ID="DetectBlocks">
+            <output_port type="social_cues::BlockList_&lt;std::allocator&lt;void> >" name="block_list"/>
+            <input_port type="std::string" name="block_topic"/>
+        </Action>
+        <Action ID="DetectFaces">
+            <output_port name="faceListOut"/>
+            <input_port name="face_topic"/>
+        </Action>
+        <SubTree ID="ErrorGameState"/>
+        <Action ID="FaceCounter">
+            <input_port name="faceListIn"/>
+            <input_port name="number_faces"/>
+        </Action>
+        <Action ID="GazeAtTarget">
+            <input_port name="action_name"/>
+            <input_port name="fixation_pose"/>
+            <input_port name="frame_id"/>
+        </Action>
+        <Action ID="GetInt16">
+            <output_port name="number"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="GetPoseArray">
+            <output_port name="pose_array"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="MoveBase">
+            <input_port name="action_name"/>
+            <input_port name="frame_id"/>
+            <input_port name="goal_pose"/>
+        </Action>
+        <Action ID="SelectBlock">
+            <input_port type="social_cues::BlockList_&lt;std::allocator&lt;void> >" name="block_list"/>
+            <output_port type="geometry_msgs::PoseStamped_&lt;std::allocator&lt;void> >" name="block_pose"/>
+            <input_port type="std::string" name="position_in_list"/>
+        </Action>
+        <Action ID="SelectPose">
+            <input_port name="pose_array"/>
+            <output_port name="pose_stamped"/>
+            <input_port name="position_in_list"/>
+        </Action>
+        <Action ID="Speak">
+            <input_port type="std::string" name="action_name"/>
+            <input_port type="std::string" name="language"/>
+            <input_port type="std::string" name="utterance"/>
+            <input_port type="std::string" name="voice"/>
+        </Action>
+        <Action ID="WaitForXSeconds">
+            <input_port name="result" default="SUCCESS">Result after specified time: SUCCESS or FAILURE</input_port>
+            <input_port name="seconds" default="5">Time in seconds</input_port>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+

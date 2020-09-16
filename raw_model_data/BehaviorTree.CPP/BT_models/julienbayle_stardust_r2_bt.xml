@@ -1,0 +1,282 @@
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <Condition ID="RobotPret" />
+            <RealParallel> 
+                <SubTree ID="TiretteAndStop" y_mul="y_mul" theta_mul="theta_mul" camp="camp" tirette_presente_last_tick="tirette_presente_last_tick" palets_depart="palets_depart" palet_pente="palet_pente" palet_chaos="palet_chaos" />
+                <SubTree ID="MinuterieAndstartAndStopWhenTimeout" palets_depart="palets_depart" palet_pente="palet_pente" palet_chaos="palet_chaos" tirette_presente_last_tick="tirette_presente_last_tick" />
+                <SubTree ID="Trier les palets" camp="camp" palets_depart="palets_depart" palet_pente="palet_pente" y_mul="y_mul" theta_mul="theta_mul" palet_chaos="palet_chaos" />
+                <SubTree ID="Palets zone chaos" camp="camp" palet_chaos="palet_chaos" y_mul="y_mul" theta_mul="theta_mul" />
+                <SubTree ID="Yeux" camp="camp"/>
+            </RealParallel>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="TiretteAndStop">
+        <ForceSuccess>
+            <Fallback>
+                <Sequence>
+                    <Condition ID="TiretteLaserPresente"/>
+                    <SetBlackboard value="true" output_key="tirette_presente_last_tick"/>
+                    <Action ID="Arreter le robot" />
+                    <Action ID="VitesseConstante" linear_x="0.0" linear_y="0.0" angular_z="0.0" />
+                    <Action ID="DefinirLeScore" score="40"/>
+                    <Action ID="ArreterLaMinuterie"/> 
+                    <Action ID="RestartRosbags" />
+                    <SetBlackboard value="0" output_key="palets_depart"/>
+                    <SetBlackboard value="0" output_key="palet_pente"/>
+                    <Fallback>
+                        <Sequence>
+                            <Condition ID="LaVoieEstLibre-Gauche"/>
+                            <Action ID="DefinirPosition" theta="0" x="-0.18" y="-1.18"/>
+                            <SetBlackboard value="jaune" output_key="camp"/>
+                            <SetBlackboard value="1.0" output_key="y_mul"/>
+                            <SetBlackboard value="1.0" output_key="sym_theta"/>
+                            <Action ms="500" ID="Attendre"/>
+                        </Sequence>
+                        <Sequence>
+                            <Action ID="DefinirPosition" theta="0" x="-0.18" y="1.18"/>
+                            <SetBlackboard value="violet" output_key="camp"/>
+                            <SetBlackboard value="-1.0" output_key="y_mul"/>
+                            <SetBlackboard value="-1.0" output_key="theta_mul"/>
+                            <Action ms="500" ID="Attendre"/>
+                        </Sequence>
+                    </Fallback>
+                </Sequence>
+                <Sequence>
+                    <SetBlackboard value="false" output_key="tirette_presente_last_tick"/>
+                </Sequence>
+            </Fallback>
+        </ForceSuccess>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="MinuterieAndstartAndStopWhenTimeout">
+        <ForceSuccess>
+            <Fallback>
+                <BlackboardCheckString return_on_mismatch="FAILURE" value_A="{tirette_presente_last_tick}" value_B="true">
+                    <Sequence>
+                        <Inverter>
+                            <Condition ID="TiretteLaserPresente"/>
+                        </Inverter>
+                        <Action seconds="88" ID="LancerLaMinuterie"/>
+                        <SetBlackboard value="1" output_key="palets_depart"/>
+                    </Sequence>
+                </BlackboardCheckString>
+                <Sequence>
+                    <Inverter>
+                        <Condition ID="MinuterieNonEcoulee"/>
+                    </Inverter>
+                    <SetBlackboard value="0" output_key="palets_depart"/>
+                    <SetBlackboard value="0" output_key="palet_pente"/>
+                    <SetBlackboard value="0" output_key="palet_chaos"/>
+                    <Action ID="Arreter le robot"/>
+                    <!--Action ID="VitesseConstante" linear_x="0.0" linear_y="0.0" angular_z="0.0" /-->
+                </Sequence>
+            </Fallback>
+        </ForceSuccess>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="Trier les palets">
+        <ForceSuccess>
+            <Fallback>
+                <BlackboardCheckString return_on_mismatch="FAILURE" value_A="{palets_depart}" value_B="1">
+                    <Fallback>
+                        <BlackboardCheckString return_on_mismatch="FAILURE" value_A="{camp}" value_B="jaune">
+                            <Sequence>
+                                <ReactiveSequence>
+                                    <Condition ID="LaVoieEstLibre-Devant"/>
+                                    <JouerUnRosbag nom="r2_jaune_13pts.bag" topics="/r2/mobile_base_controller/cmd_vel" />
+                                </ReactiveSequence>
+                                <Action ID="AjouterAuScore" score="13"/>
+                                <SetBlackboard value="0" output_key="palets_depart"/>
+                                <SetBlackboard value="0" output_key="palet_chaos"/>
+                            </Sequence>
+                        </BlackboardCheckString>
+                        <BlackboardCheckString return_on_mismatch="FAILURE" value_A="{camp}" value_B="violet">
+                            <Sequence>
+                            <ReactiveSequence>
+                                <Condition ID="LaVoieEstLibre-Devant"/>
+                                <JouerUnRosbag nom="r2_violet_13pts.bag" topics="/r2/mobile_base_controller/cmd_vel" />
+                            </ReactiveSequence>
+                            <Action ID="AjouterAuScore" score="13"/>
+                            <SetBlackboard value="0" output_key="palets_depart"/>
+                            <SetBlackboard value="0" output_key="palet_chaos"/>
+                            </Sequence>
+                        </BlackboardCheckString>
+                        <Action ID="VitesseConstante" linear_x="0.0" linear_y="0.0" angular_z="0.0" />
+                    </Fallback>
+                </BlackboardCheckString>
+                <BlackboardCheckString return_on_mismatch="FAILURE" value_A="{palet_pente}" value_B="1">
+                    <Sequence>
+                        <Action ID="Aller" theta="90" x="0.8" y="1.2" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="aller au pied de la balance"/>
+                        <Action ID="AjouterAuScore" score="12"/>
+                        <SetBlackboard value="0" output_key="palet_pente"/>
+                    </Sequence>
+                </BlackboardCheckString>
+            </Fallback>
+        </ForceSuccess>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="Yeux">
+        <RealParallel>
+            <Sequence>
+                <Action message="content.gif" repetition="1" defaut="1" ID="AfficheYeux" fps="2"/>
+                <Action ms="10000" ID="Attendre"/>
+                <Action message="carre.gif" repetition="1" defaut="1" ID="AfficheYeux" fps="10"/>
+                <Action ms="10000" ID="Attendre"/>
+                <Action message="folie.gif" repetition="1" defaut="1" ID="AfficheYeux" fps="2"/>
+                <Action ms="10000" ID="Attendre"/>
+                <Action message="perdu.gif" repetition="1" defaut="1" ID="AfficheYeux" fps="4"/>
+                <Action ms="10000" ID="Attendre"/>
+                <Action message="stardust.gif" repetition="1" defaut="1" ID="AfficheYeux" fps="1"/>
+                <Action ms="10000" ID="Attendre"/>
+            </Sequence>
+            <ForceSuccess>
+                <ReactiveFallback>
+                    <Sequence>
+                        <Inverter>
+                            <Condition ID="RobotEnBonneSante"/>
+                        </Inverter>  
+                        <Inverter>
+                            <Condition ID="MinuterieNonEcoulee"/>
+                        </Inverter>  
+                        <Action message="CPU !!!" repetition="1" defaut="0" ID="AfficheYeux" fps="40"/>
+                    </Sequence>
+                    <Sequence>
+                        <Condition ID="TiretteLaserPresente"/>
+                        <Action message="{camp}" repetition="1" defaut="0" ID="AfficheYeux" fps="30"/>
+                    </Sequence>
+                    <Sequence>
+                        <Condition ID="MinuterieDemarree"/>
+                        <Condition ID="MinuterieNonEcoulee"/>
+                        <Action ms="10000" ID="Attendre"/>
+                        <Action ID="RecupererLeScore" score="{score}"/>
+                        <Action message="{score}" repetition="1" defaut="0" ID="AfficheYeux" fps="30"/>
+                    </Sequence>
+                    <Sequence>
+                        <Inverter>
+                            <Condition ID="MinuterieNonEcoulee"/>
+                        </Inverter>    
+                        <Action ms="5000" ID="Attendre"/>
+                        <Action ID="RecupererLeScore" score="{score}"/>
+                        <Action message="{score}" repetition="1" defaut="0" ID="AfficheYeux" fps="15"/>
+                    </Sequence>
+                </ReactiveFallback>
+            </ForceSuccess>
+        </RealParallel>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="Palets zone chaos">
+        <ForceSuccess>
+            <BlackboardCheckString return_on_mismatch="FAILURE" value_A="{palet_chaos}" value_B="1">
+                <Sequence>
+                    <!--RetryUntilSuccesful num_attempts="3">
+                        <Action ID="Aller" theta="90"  x="-0.5" y="0.0" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="contourner les palets par l'extérieur"/>
+                    </RetryUntilSuccesful>
+                    <RetryUntilSuccesful num_attempts="3">
+                        <Action ID="Aller" theta="-90"  x="0.0" y="0.0" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="contourner les palets par l'extérieur"/>
+                    </RetryUntilSuccesful>
+                    <RetryUntilSuccesful num_attempts="3">
+                        <Action ID="Aller" theta="-90"  x="0.0" y="-0.7" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="contourner les palets par l'extérieur"/>
+                    </RetryUntilSuccesful>
+                    <RetryUntilSuccesful num_attempts="3">
+                        <Action ID="Aller" theta="-150"  x="-0.55" y="-1.2" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="contourner les palets par l'extérieur"/>
+                    </RetryUntilSuccesful>
+                    <ReactiveSequence>
+                        <Condition ID="LaVoieEstLibre-Derriere" />
+                        <VitesseConstante linear_x="-0.1" linear_y="0.0" angular_z="0.0" />
+                        <Action ms="2000" ID="Attendre"/>
+                    </ReactiveSequence-->
+                    <Action ID="AjouterAuScore" score="16"/>
+                    <SetBlackboard value="0" output_key="palet_chaos"/>
+                </Sequence>
+            </BlackboardCheckString>
+        </ForceSuccess>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Control ID="RealParallel" />
+        <Action ID="AfficheYeux">
+            <input_port default="0" name="defaut">1 = message par défaut</input_port>
+            <input_port default="4" name="fps">Frame per second (image animée)</input_port>
+            <input_port name="message">Message ou nom de l'image</input_port>
+            <input_port default="1" name="repetition">Nombre d'itération</input_port>
+        </Action>
+        <Action ID="AjouterAuScore">
+            <input_port name="score"/>
+        </Action>
+        <Action ID="VitesseConstante">
+            <input_port name="linear_x"/>
+            <input_port name="linear_y"/>
+            <input_port name="angular_z"/>
+        </Action>
+        <Action ID="RestartRosbags" />
+        <Action ID="Aller">
+            <input_port name="theta"/>
+            <input_port name="x"/>
+            <input_port name="y"/>
+            <input_port name="y"/>
+            <input_port name="x_mul"/>
+            <input_port name="y_mul"/>
+            <input_port name="theta_mul"/>
+            <input_port name="comment"/>
+        </Action>
+        <Action ID="ArreterLaMinuterie"/>
+        <Action ID="Attendre">
+            <input_port name="ms"/>
+        </Action>
+        <Action ID="DefinirLeScore">
+            <input_port name="score"/>
+        </Action>
+        <Action ID="DefinirPosition">
+            <input_port name="theta"/>
+            <input_port name="x"/>
+            <input_port name="y"/>
+        </Action>
+        <Action ID="RecupererLeScore">
+            <output_port name="score"/>
+        </Action>
+        <SubTree ID="Initialisation"/>
+        <Action ID="Arreter le robot" />
+        <Condition ID="TiretteLaserPresente"/>
+        <Condition ID="LaVoieEstLibre-Devant"/>
+    <Condition ID="LaVoieEstLibre-Gauche"/>
+   <Condition ID="LaVoieEstLibre-Droite"/>
+    <Condition ID="LaVoieEstLibre-Derriere"/>
+
+        <Action ID="LancerLaMinuterie">
+            <input_port name="seconds"/>
+        </Action>
+        <SubTree ID="Minuterie"/>
+        <Condition ID="MinuterieDemarree"/>
+        <Condition ID="MinuterieNonEcoulee"/>
+        <Condition ID="RobotPret"/>
+        <Condition ID="ScoreInferieurA">
+            <input_port name="score"/>
+        </Condition>
+        <SubTree ID="Trier les palets"/>
+        <SubTree ID="Yeux"/>
+        <Action ID="JouerUnRosbag">
+            <input_port name="nom"/>
+            <input_port name="topics"/>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+
+<!--Action ID="Aller" theta="90"  x="0.30" y="1.15" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="contourner les palets par l'extérieur"/>
+<Action ID="Aller" theta="180" x="0.30" y="1.05" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="se placer face aux palets"/>
+<Action ID="Aller" theta="180" x="0.05" y="1.05" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="capturer le palet vert"/>
+<Action ID="Aller" theta="270" x="0.05" y="1.05" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="tourner en directin de la zone de tri"/>
+<Action ID="Aller" theta="270" x="0.05" y="1.25" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="avancer dans la zone de tri"/>
+<Action ID="Aller" theta="180" x="0.05" y="1.25" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="se tourner en direction de la case verte"/>
+<Action ID="Aller" theta="180" x="-0.25" y="1.25" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="déposer le palet dans la case verte"/>
+<Action ID="Aller" theta="180" x="0.1" y="1.25" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="reculer pour libérer le palet"/-->
+
+    <!--Action ID="Aller" theta="90" x="0.1" y="1.05" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="remonter sur la ligne des palets"/>
+<Action ID="Aller" theta="180" x="0.1" y="1.05" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="se tourner vers les palets rouges"/>
+<Action ID="Aller" theta="180" x="-0.55" y="1.05" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="capturer les deux palets"/>
+<Action ID="Aller" theta="270" x="-0.55" y="1.05" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="se tourner en direction de la case rouge"/>
+<Action ID="Aller" theta="270" x="-0.55" y="1.25" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="pousser les palets au fond de la case rouge"/>
+<Action ID="Aller" theta="270" x="-0.55" y="1.05" y_mul="{y_mul}" theta_mul="{theta_mul}" comment="libérer les palets"/-->

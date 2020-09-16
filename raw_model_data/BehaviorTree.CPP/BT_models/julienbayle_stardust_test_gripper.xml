@@ -1,0 +1,121 @@
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <ReactiveFallback>
+                <ReactiveSequence>
+                    <Inverter>
+                        <Condition ID="IsVentouseGauche"/>
+                    </Inverter>
+                    <Action ID="Attendre" ms="3000"/>
+                </ReactiveSequence>
+                <Action ID="Pince" middle_valve="false" right_valve="false" left_valve="true"/>
+            </ReactiveFallback>
+            <Sequence>
+                <Condition ID="IsVentouseGauche"/>
+                <Action ID="Pince" middle_valve="false" right_valve="false" left_valve="true"/>
+                <Condition ID="IsVentouseCentre"/>
+                <Action ID="Pince" middle_valve="true" right_valve="false" left_valve="false"/>
+                <Condition ID="IsVentouseDroite"/>
+                <Action ID="Pince" middle_valve="false" right_valve="true" left_valve="false"/>
+            </Sequence>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="TestSensors">
+        <Sequence>
+            <Inverter>
+                <Condition ID="MinuterieNonEcoulee"/>
+            </Inverter>
+            <ForceSuccess>
+                <Condition ID="IsCampViolet"/>
+            </ForceSuccess>
+            <ForceSuccess>
+                <Condition ID="IsArretUrgence"/>
+            </ForceSuccess>
+            <ForceSuccess>
+                <Condition ID="IsTirettePresente"/>
+            </ForceSuccess>
+            <ForceSuccess>
+                <Condition ID="IsPaletCentre"/>
+            </ForceSuccess>
+            <ForceSuccess>
+                <Condition ID="IsPaletDroit"/>
+            </ForceSuccess>
+            <ForceSuccess>
+                <Condition ID="IsPaletGauche"/>
+            </ForceSuccess>
+            <ForceSuccess>
+                <Condition ID="IsVentouseCentre"/>
+            </ForceSuccess>
+            <ForceSuccess>
+                <Condition ID="IsVentouseDroite"/>
+            </ForceSuccess>
+            <ForceSuccess>
+                <Condition ID="IsVentouseGauche"/>
+            </ForceSuccess>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="AfficherLeScore"/>
+        <Action ID="AjouterAuScore">
+            <input_port default="1" name="score">Valeur à ajouter au score</input_port>
+        </Action>
+        <Action ID="Aller">
+            <input_port default="0" name="theta">Angle du robot (en degree)</input_port>
+            <input_port default="0" name="x">Position absolue en X (en metre)</input_port>
+            <input_port default="0" name="y">Position absolue en Y (en metre)</input_port>
+        </Action>
+        <Action ID="Attendre">
+            <input_port default="1000" name="ms">Temps en millisecondes</input_port>
+        </Action>
+        <Action ID="Bras">
+            <input_port default="0" name="angle_base">Angle moteur au plus pres de la base</input_port>
+            <input_port default="0" name="angle_pince">Angle moteur au plus pres de la pince</input_port>
+        </Action>
+        <Action ID="DefinirLeScore">
+            <input_port default="0" name="score">Valeur du score</input_port>
+        </Action>
+        <Action ID="DefinirTempsMinuterie">
+            <input_port default="1398" name="seconds">Temps de la minuterie en secondes</input_port>
+        </Action>
+        <Action ID="InitialiserPosition"/>
+        <Condition ID="IsArretUrgence"/>
+        <Condition ID="IsCampViolet"/>
+        <Condition ID="IsPaletCentre"/>
+        <Condition ID="IsPaletDroit"/>
+        <Condition ID="IsPaletGauche"/>
+        <Condition ID="IsRobotEnMouvement"/>
+        <Condition ID="IsTirettePresente"/>
+        <Condition ID="IsVentouseCentre"/>
+        <Condition ID="IsVentouseDroite"/>
+        <Condition ID="IsVentouseGauche"/>
+        <Action ID="LancerLaMinuterie">
+            <input_port name="seconds"/>
+        </Action>
+        <Condition ID="MinuterieNonEcoulee"/>
+        <Action ID="Pince">
+            <input_port default="false" name="left_valve"/>
+            <input_port default="false" name="middle_valve"/>
+            <input_port default="false" name="right_valve"/>
+        </Action>
+        <Condition ID="ScoreInferieurA">
+            <input_port default="1" name="score">Score</input_port>
+        </Condition>
+        <Condition ID="ScoreSuperieurA">
+            <input_port default="0" name="score">Score</input_port>
+        </Condition>
+        <SubTree ID="TestSensors"/>
+        <Action ID="VitesseConstante">
+            <input_port default="0" name="angular_z">Vitesse de rotation en rad/s</input_port>
+            <input_port default="0" name="linear_x">Vitesse dans le sens avant/arriere en m/s</input_port>
+            <input_port default="0" name="linear_y">Vitesse dans le sens droite/gauche en m/s</input_port>
+        </Action>
+        <SubTree ID="campJaune"/>
+        <SubTree ID="campViolet"/>
+        <SubTree ID="initRobot"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+

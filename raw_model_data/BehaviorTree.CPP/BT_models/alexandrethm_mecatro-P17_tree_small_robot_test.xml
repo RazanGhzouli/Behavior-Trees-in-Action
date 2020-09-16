@@ -1,0 +1,106 @@
+<!-- Evitement
+<ReactiveSequence>
+<Fallback>
+    <Condition ID="NoObstacle"/>
+    <Avoid/>
+</Fallback>
+<Move pos= positions['P2'] />
+</ReactiveSequence>
+-->
+
+<!-- AX1 : Open/Close clamp
+    AX2 : Move clamp forward/backwards
+    AX3 : Moe clamp left/right
+    AX4 :  Turn clamp
+
+      <SubTree ID="PushPuck"/>
+            <SubTree ID="GetG"/>
+            <SubTree ID="WeightG"/>
+            <SubTree ID="ChasseNeige"/>
+
+
+
+
+
+-->
+
+<root main_tree_to_execute="MainTree">
+
+    <BehaviorTree ID="MainTree">
+        <Sequence>
+
+            <SubTree ID="MoveToPuck"/>
+
+            <SubTree ID="PushPuck"/>
+            <!-- <SubTree ID="GrabGoldPuck"/> -->
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="MoveToPuck">
+        <Sequence>
+            <TurnArm name="TurnFront" pos="512"/>
+            <MoveArmFront name="MoveBack" pos="48"/>
+            <OpenPince name="close_pince" pos="477"/>
+
+            <MoveAhead distance="205"/>
+            <Turn angle="-92"/>
+            <MoveAhead distance="1190"/>
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="PushPuck">
+        <Sequence>
+            <TurnArm name="TurnRight" pos="230"/>
+            <MoveAhead distance="90"/>
+            <MoveArmSide name="MoveRight" pos="620"/>
+            <TurnArm name="TurnFront" pos="512"/>
+            <MoveArmSide name="MoveLeft" pos="0"/>
+            <Turn angle="-9"/>
+
+            <MoveAhead distance="605"/>
+            <Turn angle="95"/>
+            <OpenPince pos="650"/>
+            <MoveAhead distance="25"/>
+            <MoveArmFront name="MoveFront" pos="632"/>
+            <OpenPince name="close_pince_Gold" pos="550"/>
+            <Wait delay="1000"/>
+            <MoveArmFront name="MoveBack" pos="48"/>
+            <OpenPince name="open_pince" pos="661"/>
+
+
+
+        </Sequence>
+    </BehaviorTree>
+
+    <BehaviorTree ID="GrabGoldPuck">
+        <Sequence>            <Turn angle="90"/>
+            <OpenPince name="open_pince" pos="680"/>
+            <MoveArmFront name="MoveFront" pos="632"/>
+            <OpenPince name="close_pince_Gold" pos="557"/>
+            <MoveArmFront name="MoveBack" pos="48"/>
+            <Turn angle="180"/>
+        </Sequence>
+    </BehaviorTree>
+
+
+
+
+
+    <BehaviorTree ID="ControlTree">
+        <Sequence>
+            <Wait delay="5000"/>
+            <OpenPince name="close_pince" pos="477"/>
+            <OpenPince name="close_pince_Gold" pos="557"/>
+            <OpenPince name="open_pince" pos="661"/>
+            <TurnArm name="TurnLeft" pos="820"/>
+            <TurnArm name="TurnFront" pos="512"/>
+            <TurnArm name="TurnRight" pos="230"/>
+            <MoveArmFront name="MoveFront" pos="632"/>
+            <MoveArmFront name="MoveBack" pos="48"/>
+            <MoveArmSide name="MoveRight" pos="803"/>
+            <MoveArmSide name="MoveLeft" pos="0"/>
+        </Sequence>
+    </BehaviorTree>
+
+
+</root>

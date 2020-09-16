@@ -1,0 +1,74 @@
+<root main_tree_to_execute="bt0008">
+    <!-- ////////// -->
+    <BehaviorTree ID="bt0008">
+        <Fallback name="Main">
+            <Sequence name="Autonomus">
+                <Fallback name="ReachRoom">
+                    <Sequence name="ShouldFollow">
+                        <Condition ID="RoomKnown"/>
+                        <Fallback name="GoToRoom_Fal">
+                            <Condition ID="RobotInRoom"/>
+                            <Action ID="GoToRoom"/>
+                        </Fallback>
+                    </Sequence>
+                    <Action ID="FollowHuman"/>
+                </Fallback>
+                <Fallback name="BottleFound">
+                    <Condition ID="BottleFound"/>
+                    <Action ID="FindBottle"/>
+                </Fallback>
+                <Fallback name="Fetch">
+                    <Condition ID="BottleGrasped"/>
+                    <Sequence name="Grasp">
+                        <Fallback name="InvPoseCompute">
+                            <Sequence name="SeqInvPose">
+                                <Condition ID="InvPoseComputed"/>
+                                <Condition ID="InvPoseValid"/>
+                            </Sequence>
+                            <Action ID="ComputeInvPose"/>
+                        </Fallback>
+                        <Fallback name="GoInvPose">
+                            <Condition ID="RobotAtInvPose"/>
+                            <Sequence name="prepare">
+                                <Action ID="KeepArmsForGrasp"/>
+                                <Action ID="GoToInvPose"/>
+                            </Sequence>
+                        </Fallback>
+                        <Fallback name="Locate">
+                            <Condition ID="BottleLocated"/>
+                            <Action ID="LocateBottle"/>
+                        </Fallback>
+                        <Action ID="GraspBottle"/>
+                    </Sequence>
+                    <Action ID="SetInvPoseInvaild"/>
+                    <Action ID="KeepRunning"/>
+                </Fallback>
+            </Sequence>
+            <Action ID="AskForHelp"/>
+        </Fallback>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="AskForHelp"/>
+        <Condition ID="BottleFound"/>
+        <Condition ID="BottleGrasped"/>
+        <Condition ID="BottleLocated"/>
+        <Action ID="ComputeInvPose"/>
+        <Action ID="FindBottle"/>
+        <Action ID="FollowHuman"/>
+        <Action ID="GoToInvPose"/>
+        <Action ID="GoToRoom"/>
+        <Action ID="GraspBottle"/>
+        <Condition ID="InvPoseComputed"/>
+        <Condition ID="InvPoseValid"/>
+        <Action ID="KeepArmsForGrasp"/>
+        <Action ID="KeepRunning"/>
+        <Action ID="LocateBottle"/>
+        <Condition ID="RobotAtInvPose"/>
+        <Condition ID="RobotInRoom"/>
+        <Condition ID="RoomKnown"/>
+        <Action ID="SetInvPoseInvaild"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+
