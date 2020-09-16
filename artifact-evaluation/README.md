@@ -1,7 +1,7 @@
 # README #
 
 
-## Behavior Trees in Action: A Study of Robotics Applications artifacts evaluation README ##
+# Behavior Trees in Action: A Study of Robotics Applications artifacts evaluation README #
 First go to "artifact-evaluation" folder in the online appendix: https://github.com/RazanGhzouli/Behavior-Trees-in-Action 
 download it
 
@@ -12,6 +12,9 @@ The following are presented:
 2. Instruction on how to run the GitHub minning script and the automatic metric calculation script mentioned in Section 3.2 in the paper.
 
 ## Folder Structure: ##
+
+
+```bash
 artifact-evaluation
 │
 ├───notebooks (contains jupyter notebooks for GitHub minning and automatic metric calculation)
@@ -19,6 +22,7 @@ artifact-evaluation
 └───rawdata	 
 	├───behaviortreecpp (contains the XML files that were minned for BehaviorTree.CPP library using GitHub minning script)
 	└───pytreeros (contains the python scripts that were minned for py_tree_ros library using GitHub minning script)
+```
 
 ## Instruction for running GitHub minning script and the automatic metric calculation script
 There are two way to run these scripts depending on the host machine settings:
@@ -27,7 +31,7 @@ There are two way to run these scripts depending on the host machine settings:
  
 ## Instruction for running docker image ##
 
-# prerequisite #
+## prerequisite ##
 
 1. Docker (can be installed using the following link https://docs.docker.com/get-docker/)
 
