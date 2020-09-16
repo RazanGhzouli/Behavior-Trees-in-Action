@@ -1,0 +1,10 @@
+  <root main_tree_to_execute = "MainTree" >
+     <BehaviorTree ID="MainTree">
+        <ActivationSequence name="root_sequence">
+            <NavigateToEntrance             name="navigate_to_entrance"/>
+            <AskPerson                      name="ask_person"/>
+            <LocalizeUnoccupiedSite         name="localize_unoccupied_site"/>
+            <NavigateToUnoccupiedSite       name="navigate_to_unoccupied_site"/>
+        </ActivationSequence>
+     </BehaviorTree>
+ </root>

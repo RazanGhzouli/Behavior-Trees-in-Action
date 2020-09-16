@@ -1,0 +1,66 @@
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <SequenceStar>
+            <Action utterance="Tenho fome" ID="Speak" action_name="/gcloud_tts" voice="pt-PT-Wavenet-D" language="pt_PT"/>
+            <Action name="Wait2Seconds" result="SUCCESS" ID="WaitForXSeconds" seconds="2"/>
+            <Fallback>
+                <SequenceStar>
+                    <RetryUntilSuccesful num_attempts="3">
+                        <Action goal_pose="-1.7971;-5.5118;0.0;0;0;-0.72703;0.68659" name="Go to first point" ID="MoveBase" frame_id="map" action_name="move_base"/>
+                    </RetryUntilSuccesful>
+                    <Parallel threshold="2">
+                        <SequenceStar>
+                            <SetBlackboard value="0" output_key="charged"/>
+                            <Action ID="Charge" action="CHARGE" action_name="charging_action"/>
+                            <SetBlackboard value="1" output_key="charged"/>
+                        </SequenceStar>
+                        <SequenceStar>
+                            <Action result="SUCCESS" ID="WaitForXSeconds" seconds="45"/>
+                            <ReactiveFallback>
+                                <Condition B="1" ID="CompareInt" A="{charged}" Condition="=="/>
+                                <RetryUntilSuccesful num_attempts="100">
+                                    <ForceFailure>
+                                        <Sequence>
+                                            <Action utterance="bip bip" ID="Speak" action_name="/gcloud_tts" voice="pt-PT-Wavenet-D" language="pt_PT"/>
+                                            <Action result="SUCCESS" ID="WaitForXSeconds" seconds="2"/>
+                                        </Sequence>
+                                    </ForceFailure>
+                                </RetryUntilSuccesful>
+                            </ReactiveFallback>
+                        </SequenceStar>
+                    </Parallel>
+                </SequenceStar>
+            </Fallback>
+        </SequenceStar>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="Charge">
+            <input_port name="action" type="std::string"/>
+            <input_port name="action_name" type="std::string"/>
+        </Action>
+        <Condition ID="CompareInt">
+            <input_port name="A" type="int"/>
+            <input_port name="B" type="int"/>
+            <input_port name="Condition" type="std::string"/>
+        </Condition>
+        <Action ID="MoveBase">
+            <input_port name="action_name" type="std::string"/>
+            <input_port name="frame_id" type="std::string"/>
+            <input_port name="goal_pose" type="geometry_msgs::PoseStamped_&lt;std::allocator&lt;void> >"/>
+        </Action>
+        <Action ID="Speak">
+            <input_port name="action_name" type="std::string"/>
+            <input_port name="language" type="std::string"/>
+            <input_port name="utterance" type="std::string"/>
+            <input_port name="voice" type="std::string"/>
+        </Action>
+        <Action ID="WaitForXSeconds">
+            <input_port name="result" type="std::string"/>
+            <input_port name="seconds" type="std::string"/>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+

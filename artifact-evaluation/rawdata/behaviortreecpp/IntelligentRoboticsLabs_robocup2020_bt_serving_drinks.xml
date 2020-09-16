@@ -1,0 +1,12 @@
+ <root main_tree_to_execute = "MainTree" >
+     <BehaviorTree ID="MainTree">
+        <ActivationSequence name="root_sequence">
+            <GetOrder           name="get_order"/>
+            <NavigateToBarman   name="navigate_to_barman"/>
+            <InteractWithBarman name="interact_with_barman"/>
+            <CheckOrder         name="check_order"/>
+            <NavigateToClient   name="navigate_to_client"/>
+            <DeliverOrder       name="deliver_order"/>
+        </ActivationSequence>
+     </BehaviorTree>
+ </root>

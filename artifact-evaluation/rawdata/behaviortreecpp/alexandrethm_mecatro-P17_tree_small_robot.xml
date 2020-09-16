@@ -1,0 +1,133 @@
+<!-- Evitement
+<ReactiveSequence>
+<Fallback>
+    <Condition ID="NoObstacle"/>
+    <Avoid/>
+</Fallback>
+<Move pos= positions['P2'] />
+</ReactiveSequence>
+-->
+
+<!-- AX1 : Open/Close clamp
+    AX2 : Move clamp forward/backwards
+    AX3 : Moe clamp left/right
+    AX4 :  Turn clamp
+-->
+
+<root main_tree_to_execute="MainTree">
+
+    <BehaviorTree ID="PushPuck">
+        <Sequence>
+            <MoveAhead moveForward="true"
+                       distance = ""
+            />
+            <Turn name = "turn_90_left"
+                  angle = ""
+            />
+            <MoveAhead moveForward="true"
+                       distance = ""
+            />
+            <MoveAX_4 name="turn_clamp_90_right"
+                      pos=""
+                      mode="joint"
+            />
+            <MoveAX_3 name="move_clamp_forward"
+                      pos=""
+                      mode="joint"
+            />
+            <MoveAhead name = "psuh_pcuk"
+                        moveForward="true"
+                       distance = ""
+            />
+            <MoveAX_3 name="move_clamp_backward"
+                      pos=""
+                      mode="joint"
+            />
+        </Sequence>
+    </BehaviorTree>
+
+
+    <BehaviorTree ID="GetG">
+        <Sequence>
+        <MoveAX_1 name="open_clamp"
+                  pos=""
+                  mode="joint"
+        />
+        <MoveAhead name = "reach_goldonium"
+                   moveForward="true"
+                   distance = ""
+        />
+        <MoveAX_1 name="close_clamp"
+                  pos=""
+                  mode="joint"
+        />
+        <MoveAX_3 name="move_clamp_backward"
+                  pos=""
+                  mode="joint"
+        />
+        <MoveAX_4 name="turn_clamp_90_right"
+                  pos=""
+                  mode="joint"
+        />
+        <Sequence/>
+    </BehaviorTree>
+
+
+    <BehaviorTree ID="WeightG">
+        <Sequence>
+            <MoveAhead name = "move_backwards"
+                       moveForward="false"
+                       distance = ""
+            />
+            <Turn name = "turn_90_left"
+                  angle = ""
+            />
+            <MoveAhead name = "reach_waiting_point"
+                       moveForward="true"
+                       distance = ""
+            />
+            <!-- The small robot stops there and waits until the big robot turns left to face the place
+            where he will drop the 6th puck. Then the way is clear and the small robot can move towards the scale.
+            -->
+            <MoveAhead name = "reach_scale"
+                       moveForward="true"
+                       distance = ""
+            />
+            <MoveAX_2 name="move_clamp_forward"
+                      pos=""
+                      mode="joint"
+            />
+            <OpenClamp/>
+            <MoveAX_2 name="move_clamp_backward"
+                      pos=""
+                      mode="joint"
+            />
+        </Sequence>
+    </BehaviorTree>
+
+
+    <BehaviorTree ID="ChasseNeige">
+        <MoveAhead name = "move_backward"
+                   moveForward="false"
+                   distance = ""
+        />
+        <!-- Turn left to face the red area ? -->
+        <Turn name = "turn_left"
+              angle = ""
+        />
+        <MoveAhead name = "move_forward"
+                   moveForward="false"
+                   distance = ""
+        />
+    </BehaviorTree>
+
+
+    <BehaviorTree ID="MainTree">
+        <Sequence>
+            <SubTree ID="PushPuck"/>
+            <SubTree ID="GetG"/>
+            <SubTree ID="WeightG"/>
+            <SubTree ID="ChasseNeige"/>
+        </Sequence>
+    </BehaviorTree>
+</root>

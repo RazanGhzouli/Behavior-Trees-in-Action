@@ -1,0 +1,21 @@
+<root main_tree_to_execute = "MainTree" >
+
+  <BehaviorTree ID="MainTree">
+    <Fallback name = "root">
+      <Sequence name="find_and_fetch">
+        <Fallback name = "pippo">
+          <Sequence name = "pluto">
+            <Condition ID="Room_known" />
+            <Action ID="Go_to_room" />
+          </Sequence>
+          <Action ID="Follow_human" />
+        </Fallback>
+        <Action ID="Find_bottle" />
+        <Action ID="Fetch_bottle" />
+      </Sequence>
+      <Action ID="Ask_for_help" />
+    </Fallback>
+  </BehaviorTree>
+
+</root>
+

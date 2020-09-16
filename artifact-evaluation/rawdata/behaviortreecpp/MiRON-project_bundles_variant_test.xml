@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Parallel threshold="1">
+            <Repeat num_cycles="-1">
+                <Action ID="VariantAction" value="{variant}"/>
+            </Repeat>
+            <Sequence>
+                <Action ID="moveRoboterPosition" approachRadius="50" x="1000" y="0"/>
+                <Switch2 case_1="one" case_2="two" variable="{variant}">
+                    <Action ID="moveRoboterPosition" approachRadius="50" x="3000" y="-1000"/>
+                    <Sequence>
+                        <Action ID="moveRoboterPosition" approachRadius="50" x="-2000" y="-1000"/>
+                        <Action ID="moveRoboterPosition" approachRadius="50" x="0" y="0"/>
+                    </Sequence>
+                    <Sequence>
+                        <Action ID="moveRoboterPosition" approachRadius="50" x="2000" y="-3000"/>
+                        <Action ID="moveRoboterPosition" approachRadius="50" x="2000" y="-2000"/>
+                        <Action ID="moveRoboterPosition" approachRadius="50" x="0" y="0"/>
+                    </Sequence>
+                </Switch2>
+            </Sequence>
+        </Parallel>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="VariantAction">
+            <output_port default="{variant}" name="value"/>
+        </Action>
+        <Action ID="activateLocalization"/>
+        <Action ID="approachLocation">
+            <input_port default="1" name="locationId"/>
+        </Action>
+        <Action ID="approachWall"/>
+        <Action ID="deactivateLocalization"/>
+        <Action ID="getBaseCharging">
+            <output_port default="{charging}" name="charging"/>
+        </Action>
+        <Action ID="getPersonPose">
+            <output_port default="{x_}" name="x"/>
+            <output_port default="{y_}" name="y"/>
+            <output_port default="{yaw_}" name="yaw"/>
+        </Action>
+        <Action ID="initNavigation"/>
+        <Action ID="loadMap"/>
+        <Action ID="loadNavigationMap">
+            <input_port default="navigation-map" name="mapname"/>
+        </Action>
+        <Action ID="moveRoboterBackwardsLocation"/>
+        <Action ID="moveRoboterBackwardsRelative"/>
+        <Action ID="moveRoboterOrientateRobotAbs"/>
+        <Action ID="moveRoboterOrientateRobotRel"/>
+        <Action ID="moveRoboterPosition">
+            <input_port default="50" name="approachRadius"/>
+            <input_port default="0" name="x"/>
+            <input_port default="0" name="y"/>
+        </Action>
+        <Action ID="peoplerecognition"/>
+        <Action ID="setRobotPose">
+            <input_port default="0" name="x"/>
+            <input_port default="0" name="y"/>
+            <input_port default="0" name="yaw"/>
+        </Action>
+        <Action ID="startJoystickNavigation"/>
+        <Action ID="startReactiveNavigation"/>
+        <Action ID="stopJoystickNavigation"/>
+        <Action ID="stopReactiveNavigation"/>
+        <Action ID="triggerGlobalLocalization"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+

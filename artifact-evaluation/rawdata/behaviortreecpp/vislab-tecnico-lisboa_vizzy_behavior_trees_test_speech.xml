@@ -1,0 +1,120 @@
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Parallel threshold="1">
+            <Action topic="robot_personality" ID="GetInt16" number="personality"/>
+            <Fallback>
+                <Sequence>
+                    <Condition ID="CompareInt" Condition="==" B="0" A="{personality}"/>
+                    <Action utterance="Sou um bom robô" voice="pt-PT-Wavenet-D" ID="Speak" language="pt_PT" action_name="/gcloud_tts"/>
+                </Sequence>
+                <Sequence>
+                    <Condition ID="CompareInt" Condition="==" B="1" A="{personality}"/>
+                    <Action utterance="Sou um mau robô" voice="pt-PT-Wavenet-D" ID="Speak" language="pt_PT" action_name="/gcloud_tts"/>
+                </Sequence>
+            </Fallback>
+        </Parallel>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="ArmCartesian">
+            <input_port name="action_name"/>
+            <input_port name="frame_id"/>
+            <input_port name="pose"/>
+            <input_port name="type"/>
+        </Action>
+        <Action ID="ArmRoutines">
+            <input_port name="gesture"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="Charge">
+            <input_port name="action"/>
+            <input_port name="action_name"/>
+        </Action>
+        <SubTree ID="ChargeST"/>
+        <Action ID="CheckBattery">
+            <output_port name="battery_state" type="int"/>
+            <output_port name="percentage" type="double"/>
+            <input_port name="service_name" type="std::string"/>
+        </Action>
+        <Condition ID="CheckBool">
+            <input_port name="variable"/>
+        </Condition>
+        <Action ID="CheckCharging">
+            <output_port name="charging_state" type="int"/>
+            <input_port name="service_name" type="std::string"/>
+        </Action>
+        <Condition ID="CompareDouble">
+            <input_port name="A"/>
+            <input_port name="B"/>
+            <input_port name="Condition"/>
+        </Condition>
+        <Condition ID="CompareInt">
+            <input_port name="A"/>
+            <input_port name="B"/>
+            <input_port name="Condition"/>
+        </Condition>
+        <Action ID="DetectBlocks">
+            <output_port name="block_list" type="social_cues::BlockList_&lt;std::allocator&lt;void> >"/>
+            <input_port name="block_topic" type="std::string"/>
+        </Action>
+        <Action ID="DetectFaces">
+            <output_port name="faceListOut"/>
+            <input_port name="face_topic"/>
+        </Action>
+        <SubTree ID="ErrorGameState"/>
+        <Action ID="FaceCounter">
+            <input_port name="faceListIn"/>
+            <input_port name="number_faces"/>
+        </Action>
+        <Action ID="GazeAtTarget">
+            <input_port name="action_name"/>
+            <input_port name="fixation_pose"/>
+            <input_port name="frame_id"/>
+        </Action>
+        <Action ID="GetInt16">
+            <output_port name="number"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="GetPoseArray">
+            <output_port name="pose_array"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="MoveBase">
+            <input_port name="action_name"/>
+            <input_port name="frame_id"/>
+            <input_port name="goal_pose"/>
+        </Action>
+        <Action ID="MoveTorso">
+            <input_port name="angle"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="SelectBlock">
+            <input_port name="block_list" type="social_cues::BlockList_&lt;std::allocator&lt;void> >"/>
+            <output_port name="block_pose" type="geometry_msgs::PoseStamped_&lt;std::allocator&lt;void> >"/>
+            <input_port name="position_in_list" type="std::string"/>
+        </Action>
+        <Action ID="SelectFieldFromPoseStamped">
+            <input_port name="field"/>
+            <output_port name="output_val"/>
+            <input_port name="pose_stamped"/>
+        </Action>
+        <Action ID="SelectPose">
+            <input_port name="pose_array"/>
+            <output_port name="pose_stamped"/>
+            <input_port name="position_in_list"/>
+        </Action>
+        <Action ID="Speak">
+            <input_port name="action_name" type="std::string"/>
+            <input_port name="language" type="std::string"/>
+            <input_port name="utterance" type="std::string"/>
+            <input_port name="voice" type="std::string"/>
+        </Action>
+        <Action ID="WaitForXSeconds">
+            <input_port name="result" default="SUCCESS">Result after specified time: SUCCESS or FAILURE</input_port>
+            <input_port name="seconds" default="5">Time in seconds</input_port>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+

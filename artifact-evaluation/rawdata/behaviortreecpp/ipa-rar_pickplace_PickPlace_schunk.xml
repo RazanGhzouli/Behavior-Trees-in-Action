@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Fallback name="Pick_hold_place">
+            <Sequence name="Back home">
+                <Action ID="BTIsObjContainer" tagisobjconin="{tagisobjcon}"/>
+                <SetBlackboard output_key="target" value="name;home"/>
+                <SetBlackboard output_key="gripperout" value="open"/>
+                <SubTree GripperOut="gripperout" ID="Execution" Target="target"/>
+                <SetBlackboard output_key="tagishold" value="0"/>
+                <SetBlackboard output_key="tagisobjcon" value="0"/>
+                <SetBlackboard output_key="tagisobjpose" value="0"/>
+            </Sequence>
+            <Sequence name="Place">
+                <Action ID="BTIsHoldObj" tagisholdin="{tagishold}"/>
+                <Parallel threshold="3">
+                    <SetBlackboard output_key="containerpose" value="pose;-0.3;0.4;0.010;0;1;0;0.0002"/>
+                    <SubTree GripperOut="gripperout" ID="Execution" Target="target"/>
+                    <SubTree ContainerPose="containerpose" GripperOut="gripperout" ID="Place_subtree" TagIsObjCon="tagisobjcon" Target="target"/>
+                </Parallel>
+            </Sequence>
+            <Sequence name="Pick">
+                <Action ID="BTIsObjPose" tagisobjposein="{tagisobjpose}" targetin="{observedpose}" targetout="{observedpose}"/>
+                <Parallel threshold="2">
+                    <SubTree GripperOut="gripperout" ID="Execution" Target="target"/>
+                    <SubTree GripperOut="gripperout" ID="Pick_subtree" ObsObjPose="observedpose" TagIsHold="tagishold" Target="target"/>
+                </Parallel>
+            </Sequence>
+            <Sequence>
+                <Action ID="BTCameraFindTarget" tagisobjposeout="{tagisobjpose}" targetout="{observedpose}"/>
+                <SetBlackboard output_key="tagishold" value="0"/>
+                <SetBlackboard output_key="tagisobjcon" value="0"/>
+            </Sequence>
+        </Fallback>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="CameraObj">
+        <Sequence>
+            <SetBlackboard output_key="TagIsHold" value="0"/>
+            <SetBlackboard output_key="TagIsObjCon" value="0"/>
+            <Action ID="BTCameraFindTarget" tagisobjposeout="{TagIsObjPose}" targetout="{ObservedPose}"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="Execution">
+        <SequenceStar>
+            <Sequence>
+                <Action ID="BTWaitForTarget" targetin="{Target}" targetout="{target}"/>
+                <Action ID="BTPathPlanning" goal="{Target}" makeplan="{plan}"/>
+                <Action ID="BTFollowPath" planedplan="{plan}"/>
+            </Sequence>
+            <Sequence>
+                <Action ID="BTCheckGripperCommand" commandin="{GripperOut}" commandout="{grippercom}"/>
+                <Action ID="BTGripperMoveSchunk" commandin="{grippercom}"/>
+            </Sequence>
+        </SequenceStar>
+    </BehaviorTree>
+    <!-- ////////// x 0.3 y 0.4 z 0.012 x' 0.05-->
+    <BehaviorTree ID="Pick_subtree">
+        <Fallback name="pick_fallback">
+            <Sequence name="hold">
+                <Sequence name="went up?">
+                    <SetBlackboard output_key="height" value="0.03"/>
+                    <Action ID="BTCheckCondition" heightin="{height}" targetin="{ObsObjPose}"/>
+                </Sequence>
+                <SetBlackboard output_key="TagIsHold" value="1"/>
+            </Sequence>
+            <Sequence name="go up">
+                <Sequence name="Went down to pick?">
+                    <SetBlackboard name="SetBlackBoard" output_key="height" value="0"/>
+                    <Action ID="BTCheckCondition" heightin="{height}" targetin="{ObsObjPose}"/>
+                </Sequence>
+                <SetBlackboard output_key="height" value="0.03"/>
+                <Action ID="BTCloseToTarget" height="{height}" targetin="{ObsObjPose}" targetout="{Target}" targettype="waypoint"/>
+                <SetBlackboard output_key="gripperin" value="no"/>
+                <Action ID="BTAdvertiseGripperCommand" commandin="{gripperin}" commandout="{GripperOut}" name="keep close"/>
+            </Sequence>
+            <Sequence name="go_down_close">
+                <Sequence name="Went above obj?">
+                    <SetBlackboard output_key="height" value="0.05"/>
+                    <Action ID="BTCheckCondition" heightin="{height}" targetin="{ObsObjPose}"/>
+                </Sequence>
+                <SetBlackboard output_key="height" value="0"/>
+                <Action ID="BTCloseToTarget" height="{height}" targetin="{ObsObjPose}" targetout="{Target}" targettype="waypoint"/>
+                <SetBlackboard output_key="gripperin" value="close"/>
+                <Action ID="BTAdvertiseGripperCommand" commandin="{gripperin}" commandout="{GripperOut}" name="close gripper"/>
+            </Sequence>
+            <Sequence name="go_above">
+                <SetBlackboard output_key="height" value="0.05"/>
+                <Action ID="BTCloseToTarget" height="{height}" targetin="{ObsObjPose}" targetout="{Target}" targettype="waypoint"/>
+                <SetBlackboard output_key="gripperin" value="no"/>
+                <Action ID="BTAdvertiseGripperCommand" commandin="{gripperin}" commandout="{GripperOut}" name="open gripper"/>
+            </Sequence>
+        </Fallback>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="Place_subtree">
+        <Fallback>
+            <Sequence name="Check back">
+                <Sequence name="Placed?">
+                    <SetBlackboard output_key="height" value="0.03"/>
+                    <Action ID="BTCheckCondition" heightin="{height}" targetin="{ContainerPose}"/>
+                    <SetBlackboard output_key="TagIsObjCon" value="1"/>
+                </Sequence>
+            </Sequence>
+            <Sequence name="Go up">
+                <Sequence>
+                    <SetBlackboard output_key="height" value="-0.00"/>
+                    <Action ID="BTCheckCondition" heightin="{height}" targetin="{ContainerPose}"/>
+                </Sequence>
+                <SetBlackboard output_key="height" value="0.03"/>
+                <Action ID="BTCloseToTarget" height="{height}" targetin="{ContainerPose}" targetout="{Target}" targettype="waypoint"/>
+                <SetBlackboard output_key="gripperin" value="no"/>
+                <Action ID="BTAdvertiseGripperCommand" commandin="{gripperin}" commandout="{GripperOut}"/>
+            </Sequence>
+            <Sequence name="Go down into container">
+                <Sequence>
+                    <SetBlackboard output_key="height" value="0.05"/>
+                    <Action ID="BTCheckCondition" heightin="{height}" targetin="{ContainerPose}"/>
+                </Sequence>
+                <SetBlackboard output_key="height" value="-0.0"/>
+                <Action ID="BTCloseToTarget" height="{height}" targetin="{ContainerPose}" targetout="{Target}" targettype="waypoint"/>
+                <SetBlackboard output_key="gripperin" value="open"/>
+                <Action ID="BTAdvertiseGripperCommand" commandin="{gripperin}" commandout="{GripperOut}"/>
+            </Sequence>
+            <Sequence name="Go above container">
+                <SetBlackboard output_key="height" value="0.05"/>
+                <Action ID="BTCloseToTarget" height="{height}" targetin="{ContainerPose}" targetout="{Target}" targettype="waypoint"/>
+                <SetBlackboard output_key="gripperin" value="no"/>
+                <Action ID="BTAdvertiseGripperCommand" commandin="{gripperin}" commandout="{GripperOut}"/>
+            </Sequence>
+        </Fallback>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Undefined ID=""/>
+        <Action ID="BTAdvertiseGripperCommand">
+            <input_port default="{gripperin}" name="commandin"/>
+            <output_port default="{GripperOut}" name="commandout"/>
+        </Action>
+        <Action ID="BTCameraFindTarget">
+            <output_port default="{tagisobjpose}" name="tagisobjposeout"/>
+            <output_port default="{observedpose}" name="targetout"/>
+        </Action>
+        <Action ID="BTCheckCondition">
+            <input_port default="{height}" name="heightin"/>
+            <input_port default="{ObsObjPose}" name="targetin"/>
+        </Action>
+        <Action ID="BTCheckGripperCommand">
+            <input_port default="{GripperOut}" name="commandin"/>
+            <output_port default="{grippercom}" name="commandout"/>
+        </Action>
+        <Action ID="BTCloseToTarget">
+            <input_port default="{height}" name="height"/>
+            <input_port default="{ObsObjPose}" name="targetin"/>
+            <output_port default="{Target}" name="targetout"/>
+            <input_port default="{TargetType}" name="targettype"/>
+        </Action>
+        <Action ID="BTFollowPath">
+            <input_port default="{plan}" name="planedplan"/>
+        </Action>
+        <Action ID="BTGripperMove">
+            <input_port default="{grippercom}" name="commandin"/>
+        </Action>
+        <Action ID="BTIsHoldObj">
+            <input_port name="tagisholdin"/>
+        </Action>
+        <Action ID="BTIsObjContainer">
+            <input_port default="{tagisobjcon}" name="tagisobjconin"/>
+        </Action>
+        <Action ID="BTIsObjPose">
+            <input_port name="tagisobjposein"/>
+            <input_port name="targetin"/>
+            <output_port name="targetout"/>
+        </Action>
+        <Action ID="BTPathPlanning">
+            <input_port default="{Target}" name="goal"/>
+            <output_port default="{plan}" name="makeplan"/>
+        </Action>
+        <Action ID="BTPubFakeHoldObj"/>
+        <Action ID="BTStringToBool">
+            <output_port name="boolout"/>
+            <input_port name="stringin"/>
+        </Action>
+        <Action ID="BTStringtoTarget">
+            <input_port default="{string}" name="string"/>
+            <input_port default="{target}" name="targetout"/>
+        </Action>
+        <Action ID="BTWaitForTarget">
+            <input_port default="{Target}" name="targetin"/>
+            <output_port default="{target}" name="targetout"/>
+        </Action>
+        <SubTree ID="CameraObj">
+            <output_port default="observedpose" name="ObservedPose"/>
+            <output_port default="tagishold" name="TagIsHold"/>
+            <output_port default="tagisobjcon" name="TagIsObjCon"/>
+        </SubTree>
+        <SubTree ID="Execution">
+            <input_port default="gripperout" name="GripperOut"/>
+            <input_port default="target" name="Target"/>
+        </SubTree>
+        <SubTree ID="Pick_subtree">
+            <output_port default="gripperout" name="GripperOut"/>
+            <input_port default="observedpose" name="ObsObjPose"/>
+            <output_port default="tagishold" name="TagIsHold"/>
+            <output_port default="target" name="Target"/>
+        </SubTree>
+        <SubTree ID="Place_subtree">
+            <input_port default="containerpose" name="ContainerPose"/>
+            <output_port default="gripperout" name="GripperOut"/>
+            <output_port default="tagisobjcon" name="TagIsObjCon"/>
+            <input_port default="target" name="Target"/>
+        </SubTree>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+

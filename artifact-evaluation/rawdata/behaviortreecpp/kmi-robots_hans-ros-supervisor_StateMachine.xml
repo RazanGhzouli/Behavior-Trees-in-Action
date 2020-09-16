@@ -1,0 +1,23 @@
+ <root main_tree_to_execute = "MainTree" >
+     <BehaviorTree ID="MainTree">
+        <SequenceStar name="MainSeq">
+<!--             <Action ID="CollectWaypoints" number="3" /> -->
+            <Action ID="CollectWaypoints"/>
+            <RetryUntilSuccesful num_attempts="10" >
+                <Negation>
+                    <Sequence name="ExplorationSeq">
+                        <PopWaypoint/>
+<!--                         <MoveBase destination="NextWaypoint" /> -->
+                        <MoveBase />
+                        <Explore />
+                    </Sequence>
+                </Negation>
+            </RetryUntilSuccesful>
+<!--            <MoveBase destination="BaseStation" />-->
+        </SequenceStar>
+     </BehaviorTree>
+ </root>
+
+<!-- Heater - FireExtinguisher - FireExtinguisherLabel - FireActionNotice -->
+<!-- <Explore classes="Heater,Bin,Chair" /> -->
+

@@ -1,0 +1,40 @@
+<root main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <Sequence name="root">
+
+            <Wait name="wait for small robot to advance"
+            delay="5000"/>
+
+            <MoveAhead name="Avancer un peu" distance="100"></MoveAhead>
+
+            <Turn name="turn 1" angle="90"></Turn>
+
+            <MoveAhead name="move forward"
+                       distance="500"/>
+
+            <Turn name="turn 1" angle="-90"></Turn>
+
+            <MoveAhead name="move forward"
+                       distance="600"/>
+
+            <Turn name="turn 1" angle="-90"></Turn>
+
+            <MoveAhead name="move forward"
+                       distance="200"/>
+
+            <Turn name="turn 1" angle="-90"></Turn>
+
+            <MoveAhead name="move forward"
+                       distance="600"/>
+
+            <MoveAhead name="move back"
+                       distance="-600"/>
+
+            <MoveAhead name="move forward"
+                       distance="600"/>
+
+
+        </Sequence>
+    </BehaviorTree>
+
+</root>

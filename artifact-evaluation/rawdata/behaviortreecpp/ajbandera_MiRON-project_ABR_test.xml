@@ -1,0 +1,24 @@
+<root main_tree_to_execute="BehaviorTree">
+
+    <BehaviorTree ID="BehaviorTree">
+        <SequenceStar>
+            <approachLocation  locationId="1"/>
+            <moveRoboterPosition  x="1000" y="2000" approachRadius="0"/>
+            <moveRoboterBackwardsLocation  locationID="1"/>
+            <moveRoboterBackwardsRelative  dist="100"/>
+            <moveRoboterOrientateRobotAbs angleDeg="3.0"/>
+            <moveRoboterOrientateRobotRel angleDeg="3.0"/>
+        </SequenceStar>
+    </BehaviorTree>
+
+    <TreeNodesModel>
+        <Action ID="approachLocation"/>
+        <Action ID="moveRoboterPosition"/>
+        <Action ID="moveRoboterBackwardsLocation"/>
+        <Action ID="moveRoboterBackwardsRelative"/>
+        <Action ID="moveRoboterOrientateRobotAbs"/>
+        <Action ID="moveRoboterOrientateRobotRel"/>
+    </TreeNodesModel>
+
+</root>
+

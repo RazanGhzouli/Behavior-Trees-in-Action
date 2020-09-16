@@ -1,0 +1,96 @@
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Fallback>
+            <Sequence>
+                <Action ID="GetPoseArray" name="GetFaceList" pose_array="face_array" topic="faces"/>
+                <Action ID="SelectPose" pose_array="{face_array}" position_in_list="0" pose_stamped="face"/>
+                <Parallel threshold="2">
+                    <Action action_name="gaze" fixation_pose="{face}" ID="GazeAtTarget" frame_id="base_footprint"/>
+                    <Fallback>
+                        <Sequence>
+                            <Action ID="SelectFieldFromPoseStamped" output_val="x_thresh" field="x" pose_stamped="{face}"/>
+                            <Condition ID="CompareDouble" Condition="&lt;" A="{x_thresh}" B="1.0"/>
+                            <ReactiveSequence>
+                                <Action ID="SelectFieldFromPoseStamped" output_val="y_thresh" field="y" pose_stamped="{face}"/>
+                                <Fallback>
+                                    <ReactiveSequence>
+                                        <Condition ID="CompareDouble" Condition="&lt;" A="{y_thresh}" B="-0.05"/>
+                                        <Action action_name="/vizzy/right_arm_cartesian_controller/cartesian_action" ID="ArmCartesian" type="CARTESIAN" frame_id="base_footprint" pose="{face}"/>
+                                    </ReactiveSequence>
+                                    <ReactiveSequence>
+                                        <Condition ID="CompareDouble" Condition=">" A="{y_thresh}" B="0.05"/>
+                                        <Action action_name="/vizzy/left_arm_cartesian_controller/cartesian_action" ID="ArmCartesian" type="CARTESIAN" frame_id="base_footprint" pose="{face}"/>
+                                    </ReactiveSequence>
+                                </Fallback>
+                            </ReactiveSequence>
+                        </Sequence>
+                        <SubTree ID="LowArms"/>
+                    </Fallback>
+                </Parallel>
+            </Sequence>
+            <SubTree ID="LowArms"/>
+        </Fallback>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="ErrorGameState">
+        <SequenceStar>
+            <Action action_name="nuance_speech_tts" ID="Speak" language="pt_PT" utterance="Não sei o estado do jogo" voice="Joaquim"/>
+            <Action action_name="nuance_speech_tts" ID="Speak" language="pt_PT" utterance="Chamem o assistente" voice="Joaquim"/>
+            <Action ID="WaitForXSeconds" seconds="60" result="SUCCESS"/>
+        </SequenceStar>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="LowArms">
+        <Sequence>
+            <Action action_name="/vizzy/left_arm_cartesian_controller/cartesian_action" ID="ArmCartesian" type="HOME" frame_id="base_footprint" pose="0;0;0;0;0;0;1"/>
+            <Action action_name="/vizzy/right_arm_cartesian_controller/cartesian_action" ID="ArmCartesian" type="HOME" frame_id="base_footprint" pose="0;0;0;0;0;0;1"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="ArmCartesian">
+            <inout_port name="action_name"/>
+            <inout_port name="frame_id"/>
+            <inout_port name="pose"/>
+            <inout_port name="type"/>
+        </Action>
+        <Condition ID="CompareDouble">
+            <inout_port name="A"/>
+            <inout_port name="B"/>
+            <inout_port name="Condition"/>
+        </Condition>
+        <Action ID="GazeAtTarget">
+            <inout_port name="action_name"/>
+            <inout_port name="fixation_pose"/>
+            <inout_port name="frame_id"/>
+        </Action>
+        <Action ID="GetPoseArray">
+            <inout_port name="pose_array"/>
+            <inout_port name="topic"/>
+        </Action>
+        <SubTree ID="LowArms"/>
+        <Action ID="SelectFieldFromPoseStamped">
+            <inout_port name="field"/>
+            <inout_port name="output_val"/>
+            <inout_port name="pose_stamped"/>
+        </Action>
+        <Action ID="SelectPose">
+            <inout_port name="pose_array"/>
+            <inout_port name="pose_stamped"/>
+            <inout_port name="position_in_list"/>
+        </Action>
+        <Action ID="Speak">
+            <inout_port name="action_name"/>
+            <inout_port name="language"/>
+            <inout_port name="utterance"/>
+            <inout_port name="voice"/>
+        </Action>
+        <Action ID="WaitForXSeconds">
+            <inout_port name="result"/>
+            <inout_port name="seconds"/>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+

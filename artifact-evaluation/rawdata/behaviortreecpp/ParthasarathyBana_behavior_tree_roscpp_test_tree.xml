@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<root main_tree_to_execute = "MainTree">
+	<BehaviorTree ID="MainTree">
+		<Fallback name="root_fallback">
+			<Sequence name="move_sequence">
+				<Condition ID="condition_move_action" server_name="condition_move_action_server"/>
+				<Action ID="robot_move_action" server_name="robot_move_action_server"/>
+			</Sequence>
+			<Sequence name="stop_sequence">
+				<Condition ID="condition_stop_action" server_name="condition_stop_action_server"/>
+				<Action ID="robot_stop_action" server_name="robot_stop_action_server"/>
+			</Sequence>
+		</Fallback>
+	</BehaviorTree>
+</root>

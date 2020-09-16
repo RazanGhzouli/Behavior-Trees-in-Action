@@ -1,0 +1,39 @@
+<root main_tree_to_execute="BehaviorTree">
+    <!--------------------------------------->
+    <BehaviorTree ID="BehaviorTree">
+        <Root>
+            <Fallback name="FB1">
+                <Sequence name="S1">
+                    <Fallback name="FB2">
+                        <Sequence name="S6">
+                            <Condition ID="Room_known"/>
+                            <Action ID="Go_to_room"/>
+                        </Sequence>
+                        <Action ID="Follow_human"/>
+                    </Fallback>
+                    <Action ID="Find_bottle"/>
+                    <Action ID="Fetch_bottle"/>
+                    <Action ID="Find_glass"/>
+                    <Action ID="Fetch_glass"/>
+                    <Action ID="Pour_drink"/>
+                </Sequence>
+                <Action ID="Ask_for_help"/>
+            </Fallback>
+        </Root>
+    </BehaviorTree>
+    <!--------------------------------------->
+    <TreeNodesModel>
+        <Action ID="Ask_for_help"/>
+        <Action ID="Fetch_bottle"/>
+        <Action ID="Fetch_glass"/>
+        <Action ID="Find_bottle"/>
+        <Action ID="Find_glass"/>
+        <Action ID="Follow_human"/>
+        <Action ID="Go_to_kitchen"/>
+        <Action ID="Go_to_room"/>
+        <Action ID="Pour_drink"/>
+        <Condition ID="Room_known"/>
+    </TreeNodesModel>
+    <!--------------------------------------->
+</root>
+

@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <SetBlackboard output_key="velocity" value="0.5"/>
+            <SetBlackboard output_key="distance" value="1.0"/>
+            <Action ID="GeneralActionlib" action_name="move_forward" constants="5" result="result" variables="velocity, distance"/>
+            <Action ID="Speak" action_name="gcloud_tts" language="pt_PT" utterance="{result}" voice="pt-PT-Wavenet-D"/>
+            <Action ID="WaitForXSeconds" result="SUCCESS" seconds="5"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="ArmCartesian">
+            <input_port name="action_name"/>
+            <input_port name="frame_id"/>
+            <input_port name="pose"/>
+            <input_port name="type"/>
+        </Action>
+        <Action ID="ArmRoutines">
+            <input_port name="gesture"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="Charge">
+            <input_port name="action"/>
+            <input_port name="action_name"/>
+        </Action>
+        <Action ID="CheckBattery">
+            <output_port name="battery_state" type="int"/>
+            <output_port name="percentage" type="double"/>
+            <input_port name="service_name" type="std::string"/>
+        </Action>
+        <Condition ID="CheckBool">
+            <input_port name="variable"/>
+        </Condition>
+        <Action ID="CheckCharging">
+            <output_port name="charging_state" type="int"/>
+            <input_port name="service_name" type="std::string"/>
+        </Action>
+        <Condition ID="CompareDouble">
+            <input_port name="A"/>
+            <input_port name="B"/>
+            <input_port name="Condition"/>
+        </Condition>
+        <Condition ID="CompareInt">
+            <input_port name="A"/>
+            <input_port name="B"/>
+            <input_port name="Condition"/>
+        </Condition>
+        <Action ID="DebugAction">
+            <input_port name="string" type="std::string"/>
+        </Action>
+        <Action ID="Destroy"/>
+        <Action ID="DetectFaces">
+            <output_port name="faceListOut"/>
+            <input_port name="face_topic"/>
+        </Action>
+        <Action ID="FaceCounter">
+            <input_port name="faceListIn"/>
+            <input_port name="number_faces"/>
+        </Action>
+        <Action ID="GazeAtTarget">
+            <input_port name="action_name"/>
+            <input_port name="fixation_pose"/>
+            <input_port name="frame_id"/>
+        </Action>
+        <Action ID="GeneralActionlib">
+            <input_port name="action_name"/>
+            <input_port name="constants">A coma separated list of constants.</input_port>
+            <output_port name="result">This is a string</output_port>
+            <input_port name="variables">A coma separated list of variables.</input_port>
+        </Action>
+        <Action ID="GetFloat64">
+            <output_port name="number" type="double"/>
+            <input_port name="topic" type="std::string"/>
+        </Action>
+        <Action ID="GetInt16">
+            <output_port name="number"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="GetPoseArray">
+            <input_port name="pose_array"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="GiveFeedback">
+            <input_port default="850" name="almost_thr"/>
+            <input_port name="correct_blocks"/>
+            <input_port name="incorrect_blocks"/>
+            <input_port default="0" name="personality"/>
+            <input_port name="score"/>
+        </Action>
+        <Action ID="MoveBase">
+            <input_port name="action_name"/>
+            <input_port name="frame_id"/>
+            <input_port name="goal_pose"/>
+        </Action>
+        <Action ID="MoveTorso">
+            <input_port name="angle"/>
+            <input_port name="topic"/>
+        </Action>
+        <Action ID="ResetVars"/>
+        <Action ID="SelectBlock">
+            <input_port name="block_list" type="social_cues::BlockList_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="block_pose" type="geometry_msgs::PoseStamped_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <input_port name="position_in_list" type="std::string"/>
+        </Action>
+        <Action ID="SelectFieldFromPoseStamped">
+            <input_port name="field"/>
+            <output_port name="output_val"/>
+            <input_port name="pose_stamped"/>
+        </Action>
+        <Action ID="SelectPose">
+            <input_port name="pose_array"/>
+            <input_port name="pose_stamped"/>
+            <input_port name="position_in_list"/>
+        </Action>
+        <Action ID="SenseScore">
+            <output_port name="score"/>
+            <input_port name="score_topic"/>
+        </Action>
+        <Action ID="Speak">
+            <input_port name="action_name"/>
+            <input_port name="language"/>
+            <input_port name="utterance"/>
+            <input_port name="voice"/>
+        </Action>
+        <Action ID="TimerAction">
+            <input_port name="s_between_success">Time (s) before this node returns SUCCESS. It will return FAILURE in the meanwhile</input_port>
+        </Action>
+        <Action ID="WaitForXSeconds">
+            <input_port default="SUCCESS" name="result">Result after specified time: SUCCESS or FAILURE</input_port>
+            <input_port default="5" name="seconds">Time in seconds</input_port>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+

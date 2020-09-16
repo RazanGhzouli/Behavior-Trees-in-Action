@@ -1,0 +1,68 @@
+<root main_tree_to_execute="BehaviorTree">
+    <BehaviorTree ID="BehaviorTree">
+        <Root>
+            <Fallback name="FB1">
+                <Sequence name="S1">
+                    <Fallback name="FB2">
+                        <Condition ID="Robot_in_kitchen"/>
+                        <Action ID="Go_to_kitchen"/>
+                    </Fallback>
+                    <Sequence name="S2">
+                        <Fallback name="FB3">
+                            <Condition ID="Bottle_found"/>
+                            <Action ID="Find_bottle"/>
+                        </Fallback>
+                        <Fallback name="FB4">
+                            <Condition ID="Bottle_grasped"/>
+                            <Fallback name="FB5">
+                                <Sequence name="S3">
+                                    <Fallback name="FB7">
+                                        <Sequence name="S6">
+                                            <Condition ID="Inv_pose_computed"/>
+                                            <Condition ID="Inv_pose_valid"/>
+                                        </Sequence>
+                                        <Action ID="Compute_inv_pose"/>
+                                    </Fallback>
+                                    <Sequence name="S4">
+                                        <Fallback name="FB8">
+                                            <Condition ID="Robot_at_inv_pose"/>
+                                            <Action ID="Go_to_inv_pose"/>
+                                        </Fallback>
+                                        <Sequence name="S5">
+                                            <Fallback name="FB9">
+                                                <Condition ID="Bottle_located_with_confidence_x"/>
+                                                <Action ID="Locate_bottle"/>
+                                            </Fallback>
+                                            <Action ID="Grasp_bottle"/>
+                                        </Sequence>
+                                    </Sequence>
+                                </Sequence>
+                                <Action ID="Set_inv_pose_not_valid"/>
+                            </Fallback>
+                        </Fallback>
+                    </Sequence>
+                </Sequence>
+                <Action ID="Ask_for_help"/>
+            </Fallback>
+        </Root>
+    </BehaviorTree>
+    <TreeNodesModel>
+        <Action ID="Ask_for_help"/>
+        <Condition ID="Bottle_found"/>
+        <Condition ID="Bottle_grasped"/>
+        <Condition ID="Bottle_located_with_confidence_x"/>
+        <Action ID="Compute_inv_pose"/>
+        <Action ID="Find_bottle"/>
+        <Action ID="Go_to_inv_pose"/>
+        <Action ID="Go_to_kitchen"/>
+        <Action ID="Grasp_bottle"/>
+        <Condition ID="Inv_pose_computed"/>
+        <Condition ID="Inv_pose_valid"/>
+        <Action ID="Keep_running"/>
+        <Action ID="Locate_bottle"/>
+        <Condition ID="Robot_at_inv_pose"/>
+        <Condition ID="Robot_in_kitchen"/>
+        <Action ID="Set_inv_pose_not_valid"/>
+    </TreeNodesModel>
+</root>
+
