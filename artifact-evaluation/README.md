@@ -1,4 +1,7 @@
-#Behavior Trees in Action: A Study of Robotics Applications artifacts evaluation README
+# README #
+
+
+## Behavior Trees in Action: A Study of Robotics Applications artifacts evaluation README ##
 First go to "artifact-evaluation" folder in the online appendix: https://github.com/RazanGhzouli/Behavior-Trees-in-Action 
 download it
 
@@ -8,7 +11,7 @@ The following are presented:
 1. Folder structure with an overview of folders content. 
 2. Instruction on how to run the GitHub minning script and the automatic metric calculation script mentioned in Section 3.2 in the paper.
 
-## Folder Structure:
+## Folder Structure: ##
 artifact-evaluation
 │
 ├───notebooks (contains jupyter notebooks for GitHub minning and automatic metric calculation)
@@ -22,13 +25,13 @@ There are two way to run these scripts depending on the host machine settings:
 1. If you have a running jupyter notebook on your machine then run the application and move the scripts (BT_mining_script.ipynb and composite_node_counting.ipynb) in notebooks folder to your jupyter working directory.	
 2. If you do not have jupyter notebook on your machine, then follow the "Instruction for running docker image" section.
  
-##	Instruction for running docker image
+## Instruction for running docker image ##
 
-# prerequisite
+# prerequisite #
 
 1. Docker (can be installed using the following link https://docs.docker.com/get-docker/)
 
-# Running docker 
+## Running docker ##
 1. After installing docker, open docker for desktop.
 2. open your command line and test that docker is working by checking docker versio:
 
