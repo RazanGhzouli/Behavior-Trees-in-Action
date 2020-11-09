@@ -4,7 +4,7 @@
 # Behavior Trees in Action: A Study of Robotics Applications artifacts evaluation README #
 First go to "artifact-evaluation" folder in the online appendix on GitHub: https://github.com/RazanGhzouli/Behavior-Trees-in-Action 
 or on Bitbucket: https://bitbucket.org/easelab/behaviortrees
-download it
+and download it
 
 This document presents an overview of the submitted artifacts. 
 The following are presented:
@@ -27,14 +27,16 @@ artifact-evaluation
 
 ## Instruction for running GitHub minning script and the automatic metric calculation script
 There are two way to run these scripts depending on the host machine settings:
-1. If you have a running jupyter notebook on your machine then run the application and move the scripts (BT_mining_script.ipynb and composite_node_counting.ipynb) in notebooks folder to your jupyter working directory.	
+1. If you have a running jupyter notebook on your machine then run the application and move the scripts (BT-mining-script.ipynb and composite-node-counting.ipynb) in notebooks folder to your jupyter working directory.	
 2. If you do not have jupyter notebook on your machine, then follow the "Instruction for running docker image" section.
  
 ## Instruction for running docker image ##
 
 ## prerequisite ##
 
-1. Docker (can be installed using the following link https://docs.docker.com/get-docker/)
+• Docker (can be installed using the following link https://docs.docker.com/get-docker/)
+• Your GitHub token to run the mine script (https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token).
+• The following instructions are for Windows users. They might be applied to Linux users as well, but I didn't test them on a Linux machine.
 
 ## Running docker ##
 1. After installing docker, open docker for desktop.
@@ -74,6 +76,6 @@ There are two way to run these scripts depending on the host machine settings:
 
 6. Use the link the starts with "http://127.0.0.1:8888/..." to access jupyter.
 
-7. Open the script "BT_mining_script.ipynb" to run the GitHub mine script. Comments are provided in the file to guide you how to run it.
-If you get the error "BadCredentialsException: 401 " when running "BT_mining_script.ipynb", please change the GitHub token in the second cell.
-8. Open the script "composite_node_counting.ipynb" to run the node count script. Comments are provided in the file to guide you how to run it.
+7. Open the script "BT-mining-script.ipynb" to run the GitHub mine script. Comments are provided in the file to guide you how to run it.
+If you get the error "BadCredentialsException: 401 " when running "BT-mining-script.ipynb", please change the GitHub token in the second cell.
+8. Open the script "composite-node-counting.ipynb" to run the node count script. Comments are provided in the file to guide you how to run it.
