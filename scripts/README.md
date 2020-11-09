@@ -42,7 +42,7 @@ There are two way to run these scripts depending on the host machine settings:
 
 ## Running docker ##
 1. After installing docker, open docker for desktop.
-2. open your command line and test that docker is working by checking docker versio:
+2. open your command line and test that docker is working by checking docker version:
 ```
 	docker --version
 ```
