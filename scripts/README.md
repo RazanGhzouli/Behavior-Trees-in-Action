@@ -16,7 +16,7 @@ The following are presented:
 
 
 ```bash
-artifact-evaluation
+scripts
 │
 ├───notebooks (contains jupyter notebooks for GitHub minning and automatic metric calculation)
 │ 
