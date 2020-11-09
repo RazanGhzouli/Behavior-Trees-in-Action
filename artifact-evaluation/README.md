@@ -2,7 +2,8 @@
 
 
 # Behavior Trees in Action: A Study of Robotics Applications artifacts evaluation README #
-First go to "artifact-evaluation" folder in the online appendix: https://github.com/RazanGhzouli/Behavior-Trees-in-Action 
+First go to "artifact-evaluation" folder in the online appendix on GitHub: https://github.com/RazanGhzouli/Behavior-Trees-in-Action 
+or on Bitbucket: https://bitbucket.org/easelab/behaviortrees
 download it
 
 This document presents an overview of the submitted artifacts. 
