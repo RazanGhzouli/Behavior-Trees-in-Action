@@ -3,10 +3,11 @@
 
 ### What is this repository for? ###
 
-This is Appendix for the paper Behavior Trees in Action: A Study of Robotics Applications.
+This online Appendix is for the paper Behavior Trees in Action: A Study of Robotics Applications (https://arxiv.org/abs/2010.06256).
+The same informatiom can be found in our Bitbucket repository as well (https://bitbucket.org/easelab/behaviortrees).
 
 ### How do I get set up? ###
-Please refer to the folder artifact-evaluation to check how to run the scripts
+Please refer to the folder scripts for mine scripts and instruction how to run them. 
 
 
 ### Who do I talk to? ###
