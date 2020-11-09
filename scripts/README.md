@@ -34,8 +34,10 @@ There are two way to run these scripts depending on the host machine settings:
 
 ## prerequisite ##
 
-• Docker (can be installed using the following link https://docs.docker.com/get-docker/)
+• Docker (can be installed using the following link https://docs.docker.com/get-docker/).
+
 • Your GitHub token to run the mine script (https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token).
+
 • The following instructions are for Windows users. They might be applied to Linux users as well, but I didn't test them on a Linux machine.
 
 ## Running docker ##
