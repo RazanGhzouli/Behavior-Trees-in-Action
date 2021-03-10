@@ -108,7 +108,19 @@ class MockGithubResponse(unittest.TestCase):
         result = query_github(g ,keywords = "py_trees_ros")
         self.assertEqual(len(list(limit_result_size(result,desired_size))), desired_size, "the limit_result_size function did not slice the result size")
 
-
+    
+    def testLimitSizeReturnedValue(self):
+        """
+        Test limit_result_size function does return results
+        """
+        query_github = BT_mining_script_for_testing.query_github
+        limit_result_size = BT_mining_script_for_testing.limit_result_size
+               
+        data = ['be505053a366341d36704f843e3f2a6e056774e5']
+        desired_size = 10
+        g = Github(data[0])
+        result = query_github(g ,keywords = "py_trees_ros")
+        self.assertTrue(limit_result_size(result,desired_size), "function returned empty result")
         
     
         
