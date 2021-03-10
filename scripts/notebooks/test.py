@@ -12,9 +12,10 @@ import mock
 import io
 import unittest.mock
 from github import Github
-
-
-    
+from unittest.mock import patch
+import os
+import re
+   
 
     
 
@@ -28,7 +29,7 @@ class MockGithubResponse(unittest.TestCase):
         access_token = BT_mining_script_for_testing.access_token
         
         ### you should add a working token here to test 
-        data = ['16b16fdd48defe39cf97e64812805254b3a5584d']
+        data = ['be505053a366341d36704f843e3f2a6e056774e5']
         result = access_token(data[0])
 
         self.assertIsNotNone(
@@ -47,6 +48,25 @@ class MockGithubResponse(unittest.TestCase):
 
         access_token(data[0])             
         self.assertEqual(mock_stdout.getvalue(), expected_output, "another type of error not related to access token ")
+        
+        
+    @patch('builtins.input', return_value='py_trees_ros')
+    def testQueryGithubInput(self, input):
+        """
+        Test query function catch entered input
+        """
+        
+        query_github = BT_mining_script_for_testing.query_github
+               
+        data = ['be505053a366341d36704f843e3f2a6e056774e5'] 
+        g = Github(data[0])
+        
+        self.assertIsNotNone(
+            query_github(g), "input wasn't catched by function")
+
+        
+       
+        
 
         
     
