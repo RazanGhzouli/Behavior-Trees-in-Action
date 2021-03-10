@@ -121,7 +121,27 @@ class MockGithubResponse(unittest.TestCase):
         g = Github(data[0])
         result = query_github(g ,keywords = "py_trees_ros")
         self.assertTrue(limit_result_size(result,desired_size), "function returned empty result")
+    
+    
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)       
+    def testDownloadFiles (self, mock_stdout):
+        """
+        Test download_models download files
         
+        """
+        query_github = BT_mining_script_for_testing.query_github
+        limit_result_size = BT_mining_script_for_testing.limit_result_size
+        extract_url_repo_name = BT_mining_script_for_testing.extract_url_repo_name
+        download_models = BT_mining_script_for_testing.download_models
+               
+        data = ['be505053a366341d36704f843e3f2a6e056774e5']
+        desired_size = 2
+        g = Github(data[0])
+        result = extract_url_repo_name(limit_result_size(query_github(g ,keywords = "py_trees_ros"),desired_size))
+        expected_output = "Download complete for 2 files\n"
+        
+        download_models(os.getcwd(),result)  
+        self.assertEqual((re.search( "(Download complete for 2 files\n)", mock_stdout.getvalue()).group(1)), expected_output, "Files were not downloaded")    
     
         
 
