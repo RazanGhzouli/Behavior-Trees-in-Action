@@ -79,7 +79,20 @@ class MockGithubResponse(unittest.TestCase):
         query_github(g ,keywords = "py_trees_ros")
         self.assertEqual(mock_stdout.getvalue(), expected_output, "Number of files differ from the paper based results")
         
-       
+    
+        
+    def testFileWriting(self):
+        """
+        Test extract_url_repo_name function return non-empty dictionary of  URL and repo names
+        """
+        query_github = BT_mining_script_for_testing.query_github
+        extract_url_repo_name = BT_mining_script_for_testing.extract_url_repo_name
+               
+        data = ['be505053a366341d36704f843e3f2a6e056774e5'] 
+        g = Github(data[0])
+        result = query_github(g ,keywords = "py_trees_ros")
+        
+        self.assertTrue(extract_url_repo_name(result),"function returned empty dictionary")
         
 
         
