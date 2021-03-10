@@ -32,7 +32,21 @@ class MockGithubResponse(unittest.TestCase):
         result = access_token(data[0])
 
         self.assertIsNotNone(
-            result, "access token is not valid")
+            result, "access token is not valid, change the token in the code to working one")
+        
+        
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    def testAccessTokenErrorCatch(self, mock_stdout):
+        """
+        Test access token function catch error with token value
+        """
+        access_token = BT_mining_script_for_testing.access_token
+        
+        data = ['12345678932165498774185296332145987555']
+        expected_output = "Please provide a working access token\n"
+
+        access_token(data[0])             
+        self.assertEqual(mock_stdout.getvalue(), expected_output, "another type of error not related to access token ")
 
         
     
