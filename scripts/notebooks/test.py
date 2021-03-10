@@ -143,6 +143,27 @@ class MockGithubResponse(unittest.TestCase):
         download_models(os.getcwd(),result)  
         self.assertEqual((re.search( "(Download complete for 2 files\n)", mock_stdout.getvalue()).group(1)), expected_output, "Files were not downloaded")    
     
+    
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)       
+    def testSaveDictionary (self, mock_stdout):
+        """
+        Test extract_url_repo_name save dictionary with repo and url names
+        
+        """
+        query_github = BT_mining_script_for_testing.query_github
+        limit_result_size = BT_mining_script_for_testing.limit_result_size
+        extract_url_repo_name = BT_mining_script_for_testing.extract_url_repo_name
+               
+        data = ['be505053a366341d36704f843e3f2a6e056774e5']
+        desired_size = 2
+        g = Github(data[0])
+
+        expected_output = "A file containing repo name and files URL was saved to your working directory\n"
+        extract_url_repo_name(limit_result_size(query_github(g ,keywords = "py_trees_ros"),desired_size))
+        self.assertEqual((re.search( "(A file containing repo name and files URL was saved to your working directory\n)", mock_stdout.getvalue()).group(1)), expected_output, "Dictionary was not saved")
+        
+    
+    
         
 
 if __name__ == '__main__':
