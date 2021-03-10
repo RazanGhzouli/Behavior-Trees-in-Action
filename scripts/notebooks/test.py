@@ -63,7 +63,21 @@ class MockGithubResponse(unittest.TestCase):
         
         self.assertIsNotNone(
             query_github(g), "input wasn't catched by function")
-
+    
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    def testNumberReturnedFiles (self, mock_stdout):
+        """
+        Test query function return specific number of files
+        
+        """
+        query_github = BT_mining_script_for_testing.query_github
+               
+        data = ['be505053a366341d36704f843e3f2a6e056774e5'] 
+        g = Github(data[0])
+        expected_output = "Found 258 file(s)\n"
+        
+        query_github(g ,keywords = "py_trees_ros")
+        self.assertEqual(mock_stdout.getvalue(), expected_output, "Number of files differ from the paper based results")
         
        
         
