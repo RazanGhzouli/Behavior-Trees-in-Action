@@ -16,13 +16,18 @@ The following are presented:
 
 
 ```bash
-scripts
+notebooks (contains jupyter notebooks for GitHub minning and automatic metric calculation)
 │
-├───notebooks (contains jupyter notebooks for GitHub minning and automatic metric calculation)
+├───BT-mining-script.ipynb (mine github repos using Ipython)
 │ 
-└───rawdata	 
-	├───behaviortreecpp (contains the XML files that were minned for BehaviorTree.CPP library using GitHub minning script)
-	└───pytreeros (contains the python scripts that were minned for py_tree_ros library using GitHub minning script)
+└───composite-node-counting.ipynb (count composite nodes in BT models)
+│ 
+└───BT_mining_script_for_testing.py (mine github repos using python)
+│ 
+└───test.py (test script with multiple unit tests)
+│ 
+└───README.txt
+
 ```
 
 ## Instruction for running GitHub minning script and the automatic metric calculation script
