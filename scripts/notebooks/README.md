@@ -86,3 +86,18 @@ There are two way to run these scripts depending on the host machine settings:
 7. Open the script "BT-mining-script.ipynb" to run the GitHub mine script. Comments are provided in the file to guide you how to run it.
 If you get the error "BadCredentialsException: 401 " when running "BT-mining-script.ipynb", please change the GitHub token in the second cell.
 8. Open the script "composite-node-counting.ipynb" to run the node count script. Comments are provided in the file to guide you how to run it.
+
+
+## Instruction for running test script
+
+In test.py script multiple testing functions are defined. You can find a description for each one of them in the file comments. 
+To manually run the test.py script in your cmd:
+1. Generate a Github access token.
+2. In your cmd change directory to the test.py location.
+3. Assuming your access token is "123456789" use the following command to run the tests:
+```
+python test.py 123456789
+```
+4. The tests will run automatically with either test passing or not.
+
+Please note the tests are written for (BT_mining_script_for_testing.py), which has similar functionality to the jupyter notebook version (BT-mining-script.ipynb).
