@@ -15,11 +15,14 @@ from github import Github
 from unittest.mock import patch
 import os
 import re
-   
+import sys
+import argparse 
 
     
 
 class MockGithubResponse(unittest.TestCase):
+    ## fake access token. In case access token not passed in cmd, add a working one here
+    data = '12345678932165498774185296332145987555'
 
         
     def testAccessTokenWorking(self):
@@ -28,9 +31,8 @@ class MockGithubResponse(unittest.TestCase):
         """
         access_token = BT_mining_script_for_testing.access_token
         
-        ### you should add a working token here to test 
-        data = ['be505053a366341d36704f843e3f2a6e056774e5']
-        result = access_token(data[0])
+
+        result = access_token(self.data)
 
         self.assertIsNotNone(
             result, "access token is not valid, change the token in the code to working one")
@@ -43,6 +45,7 @@ class MockGithubResponse(unittest.TestCase):
         """
         access_token = BT_mining_script_for_testing.access_token
         
+        ## fake access token
         data = ['12345678932165498774185296332145987555']
         expected_output = "Please provide a working access token\n"
 
@@ -58,8 +61,7 @@ class MockGithubResponse(unittest.TestCase):
         
         query_github = BT_mining_script_for_testing.query_github
                
-        data = ['be505053a366341d36704f843e3f2a6e056774e5'] 
-        g = Github(data[0])
+        g = Github(self.data)
         
         self.assertIsNotNone(
             query_github(g), "input wasn't catched by function")
@@ -72,9 +74,8 @@ class MockGithubResponse(unittest.TestCase):
         """
         query_github = BT_mining_script_for_testing.query_github
                
-        data = ['be505053a366341d36704f843e3f2a6e056774e5'] 
-        g = Github(data[0])
-        expected_output = "Found 258 file(s)\n"
+        g = Github(self.data)
+        expected_output = "Found 254 file(s)\n"
         
         query_github(g ,keywords = "py_trees_ros")
         self.assertEqual(mock_stdout.getvalue(), expected_output, "Number of files differ from the paper based results")
@@ -88,8 +89,7 @@ class MockGithubResponse(unittest.TestCase):
         query_github = BT_mining_script_for_testing.query_github
         extract_url_repo_name = BT_mining_script_for_testing.extract_url_repo_name
                
-        data = ['be505053a366341d36704f843e3f2a6e056774e5'] 
-        g = Github(data[0])
+        g = Github(self.data)
         result = query_github(g ,keywords = "py_trees_ros")
         
         self.assertTrue(extract_url_repo_name(result),"function returned empty dictionary")
@@ -102,9 +102,8 @@ class MockGithubResponse(unittest.TestCase):
         query_github = BT_mining_script_for_testing.query_github
         limit_result_size = BT_mining_script_for_testing.limit_result_size
                
-        data = ['be505053a366341d36704f843e3f2a6e056774e5']
         desired_size = 10
-        g = Github(data[0])
+        g = Github(self.data)
         result = query_github(g ,keywords = "py_trees_ros")
         self.assertEqual(len(list(limit_result_size(result,desired_size))), desired_size, "the limit_result_size function did not slice the result size")
 
@@ -116,9 +115,8 @@ class MockGithubResponse(unittest.TestCase):
         query_github = BT_mining_script_for_testing.query_github
         limit_result_size = BT_mining_script_for_testing.limit_result_size
                
-        data = ['be505053a366341d36704f843e3f2a6e056774e5']
         desired_size = 10
-        g = Github(data[0])
+        g = Github(self.data)
         result = query_github(g ,keywords = "py_trees_ros")
         self.assertTrue(limit_result_size(result,desired_size), "function returned empty result")
     
@@ -134,9 +132,8 @@ class MockGithubResponse(unittest.TestCase):
         extract_url_repo_name = BT_mining_script_for_testing.extract_url_repo_name
         download_models = BT_mining_script_for_testing.download_models
                
-        data = ['be505053a366341d36704f843e3f2a6e056774e5']
         desired_size = 2
-        g = Github(data[0])
+        g = Github(self.data)
         result = extract_url_repo_name(limit_result_size(query_github(g ,keywords = "py_trees_ros"),desired_size))
         expected_output = "Download complete for 2 files\n"
         
@@ -154,9 +151,8 @@ class MockGithubResponse(unittest.TestCase):
         limit_result_size = BT_mining_script_for_testing.limit_result_size
         extract_url_repo_name = BT_mining_script_for_testing.extract_url_repo_name
                
-        data = ['be505053a366341d36704f843e3f2a6e056774e5']
         desired_size = 2
-        g = Github(data[0])
+        g = Github(self.data)
 
         expected_output = "A file containing repo name and files URL was saved to your working directory\n"
         extract_url_repo_name(limit_result_size(query_github(g ,keywords = "py_trees_ros"),desired_size))
@@ -174,9 +170,8 @@ class MockGithubResponse(unittest.TestCase):
         limit_result_size = BT_mining_script_for_testing.limit_result_size
         extract_url_repo_name = BT_mining_script_for_testing.extract_url_repo_name
                
-        data = ['be505053a366341d36704f843e3f2a6e056774e5']
         desired_size = 2
-        g = Github(data[0])
+        g = Github(self.data)
 
         expected_output = "The number of repository: 2\n"
         extract_url_repo_name(limit_result_size(query_github(g ,keywords = "py_trees_ros"),desired_size))
@@ -184,7 +179,13 @@ class MockGithubResponse(unittest.TestCase):
     
         
 
+
 if __name__ == '__main__':
+
+    if len(sys.argv) >= 1:
+    
+        MockGithubResponse.data = sys.argv.pop()
+        
     unittest.main()
     print("Everything passed")
     
