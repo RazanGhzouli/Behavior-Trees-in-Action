@@ -4,7 +4,7 @@ python:
 install:
   - pip install -r requirements.txt
 script:
-  - python -m unittest -s test  -t scripts/notebooks
+  - python -m unittest discover -s test -t scripts/notebooks
   
 env:
     global:
