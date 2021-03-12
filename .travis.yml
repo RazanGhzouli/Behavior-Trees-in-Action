@@ -4,4 +4,9 @@ python:
 install:
   - pip install -r requirements.txt
 script:
-  - python -m unittest discover -s test -t scripts/notebooks
+  - python discover -s test.py  -t scripts/notebooks
+  
+env:
+    global:
+        secure: "dmazoa9e7hknhUcs0/SQ0vCzwAyDHBmJMYCuiYjMAQ/lAhgVZnhKBCPA+ICRF5V1eX7QQOmyld5uixcSwjJ9QU9fG/+1iuu5Pelt3yTbMdHTuBm4OIovBqgdCvP7N3CnTGxLlcrZpXAcrHlA3E0nAsiyjQdCKC7ADBREliwM2mOXXKtxd5zGqGsgPMAk4hfboCANEEpxHZVZaVBIxlj8ciF7bGomnDmOvWhhhn5svBo+RC8Nw5CDnwBoU7Oqgg3MD5tYpb0RbG346vAwiIfLsKzdhIpP1T4CB3eD5o5pRNmy04fOGyLSry85VpRTxUE1CkJZQjpFYCEtndVAUFbcHpxH04dRif6ZWpJSSHzG1V1cs9GsIuyBiJnhsnthfFxxO2souOb9dStgp0C3BUSzzo3KP3YcViMy0C1MQAN6rnjDl5BRZQtpmPLRegIvUAM1zBGdxG8SLQvEumBm3lDRpjPvmCRRfxqehtv3QWFvI4zRV5Bu2YIK7sndNyu+BTdZJf667NWWb9gmdN4xh1OSA+in4rI8Zf6s8NcDnARs/qUlFvBQPqJ01STyfPJIJShL6XyFS8RtqMY3fgy5DPlJUvw+DxNw+HdHmNUxN5jAtp6LfZ0M/a8UgeLi9S7VyXlFRdvGzkwlDSdv2nfwE52+tUy864MRvVd7IiYAo9xd7os="
+    
