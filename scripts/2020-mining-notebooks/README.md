@@ -16,7 +16,7 @@ The following are presented:
 
 
 ```bash
-notebooks (contains jupyter notebooks for GitHub minning and automatic metric calculation)
+2020-mining-notebooks (contains jupyter notebooks for GitHub minning and automatic metric calculation)
 │
 ├───2020-rawdata	 
 │	├───behaviortreecpp (contains the XML files that were minned for BehaviorTree.CPP library using GitHub minning script)
