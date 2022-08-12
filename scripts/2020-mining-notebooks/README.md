@@ -2,7 +2,7 @@
 
 
 # Behavior Trees in Action: A Study of Robotics Applications artifacts #
-First go to "scripts" folder in the online appendix on GitHub: https://github.com/RazanGhzouli/Behavior-Trees-in-Action 
+First go to [2020-mining-notebooks](https://github.com/RazanGhzouli/Behavior-Trees-in-Action/tree/master/scripts/2020-mining-notebooks) folder in the online appendix on GitHub: https://github.com/RazanGhzouli/Behavior-Trees-in-Action 
 or on Bitbucket: https://bitbucket.org/easelab/behaviortrees
 and download it
 
@@ -17,6 +17,10 @@ The following are presented:
 
 ```bash
 notebooks (contains jupyter notebooks for GitHub minning and automatic metric calculation)
+│
+├───2020-rawdata	 
+│	├───behaviortreecpp (contains the XML files that were minned for BehaviorTree.CPP library using GitHub minning script)
+│	└───pytreeros (contains the python scripts that were minned for py_tree_ros library using GitHub minning script)
 │
 ├───BT-mining-script.ipynb (mine github repos using Ipython)
 │ 
