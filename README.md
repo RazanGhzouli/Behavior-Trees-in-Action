@@ -16,9 +16,9 @@ In the [2022-filtered_models_dataset](2022-filtered_models_dataset) you can find
 
 In the [2022-sampled-dataset](2022-sampled-dataset) you can find the randomly sampled dataset used in paper A analysis.
 
-We have structured both former mentioned folders as two seperate folders each for a dataset: behavior trees dataset and state machines dataset. 
+We have structured both former mentioned folders as two seperate folders each for a dataset: behavior trees dataset and state machines dataset. In the "raw-model-data" folder in each dataset folder, you can find the codes that include the behavior model in a project. 
 
-In the "raw-model-data" folder in each dataset folder, you can find the codes that include the behavior model in a project. For the statistics that are aggregated and presented in both papers, we provide an excel file for each behavior modeling languague dataset with detailed stats about each model. Finally, all the codes mentioned in our papers and used for mining projects and analysis is provided in the [scripts folder](scripts).
+For the statistics that are aggregated and presented in both papers, we provide an excel file for each behavior modeling languague dataset with detailed stats about each model. Finally, all the codes mentioned in our papers and used for mining projects and analysis is provided in the [scripts folder](scripts).
 
 ### Who do I talk to? ###
 
