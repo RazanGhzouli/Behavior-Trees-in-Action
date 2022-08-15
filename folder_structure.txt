@@ -1,0 +1,439 @@
+
+\BEHAVIOR-TREES-IN-ACTION
+|   .gitignore
+|   2022-filtered_models_files_name.xlsx
+|   appendix.pdf
+|   folder_structure.txt
+|   LICENSE
+|   README.md
+|   
++---2022-filtered_models_dataset
+|   +---behavior-trees-dataset
+|   |       btcpp_final.zip
+|   |       pytreesros_final.zip
+|   |       
+|   \---state-machines-dataset
+|           flexbe_final.zip
+|           smach_final.zip
+|           
++---2022-sampled-dataset
+|   +---behavior-trees-dataset
+|   |   |   .travis.yml
+|   |   |   behavior-trees-sampled-projects.xlsx
+|   |   |   folder_structure.txt
+|   |   |   README.md
+|   |   |   requirements.txt
+|   |   |   
+|   |   +---BT-models-visualization
+|   |   |   |   BehaviorTree_CPP_metamodel.pdf
+|   |   |   |   dyno_combined.pdf
+|   |   |   |   dyno_parcel_delivery.pdf
+|   |   |   |   dyno_route_scheduler.pdf
+|   |   |   |   refillBTModel.pdf
+|   |   |   |   roborts_project_bt.pdf
+|   |   |   |   stardust_r1_bt.pdf
+|   |   |   |   
+|   |   |   \---behaviortreeCpp-groot
+|   |   |           ajbandera_MiRON-project_ABR_test.JPG
+|   |   |           alexandrethm_mecatro-P17_Talk.JPG
+|   |   |           CARVE-ROBMOSYS_BTCompiler_bt_groot.JPG
+|   |   |           CARVE-ROBMOSYS_BTCompiler_bt_groot_1_1.JPG
+|   |   |           CARVE-ROBMOSYS_BTCompiler_bt_groot_FAIL.JPG
+|   |   |           CARVE-ROBMOSYS_BTCompiler_carve_use_case_1.JPG
+|   |   |           CARVE-ROBMOSYS_BTCompiler_carve_use_case_2.JPG
+|   |   |           CARVE-ROBMOSYS_BTCompiler_carve_use_case_3.JPG
+|   |   |           CARVE-ROBMOSYS_BTCompiler_uc2.JPG
+|   |   |           CARVE-ROBMOSYS_BTCompiler_uc3.JPG
+|   |   |           CARVE-ROBMOSYS_carve-scenarios-config_Scenario2.JPG
+|   |   |           CARVE-ROBMOSYS_Yarp-SmartSoft-Integration_bt_description.JPG
+|   |   |           ipa-rar_pickplace_PickPlace_schunk.JPG
+|   |   |           julienbayle_stardust_r1_bt.JPG
+|   |   |           julienbayle_stardust_r2_bt.JPG
+|   |   |           julienbayle_stardust_tests_bt.JPG
+|   |   |           julienbayle_stardust_test_gripper.JPG
+|   |   |           MiRON-project_bundles_main.JPG
+|   |   |           MiRON-project_bundles_test.JPG
+|   |   |           MiRON-project_bundles_test_get_person.JPG
+|   |   |           MiRON-project_bundles_variant_test.JPG
+|   |   |           ParthasarathyBana_behavior_tree_roscpp_test_tree.JPG
+|   |   |           skylerpan_neuronbot2_multibot_chianghuang_bt.JPG
+|   |   |           skylerpan_neuronbot2_multibot_multi_bt.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_behavior_trees_demo_1.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_behavior_trees_demo_2.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_behavior_trees_demo_face_pointer.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_behavior_trees_test_arm_routines.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_behavior_trees_test_cartesian.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_behavior_trees_test_speech.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_playground_cool_action.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_playground_fancy_bt.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_playground_forward.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_playground_hello_world.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_playground_nothing.JPG
+|   |   |           vislab-tecnico-lisboa_vizzy_playground_security_collapse.JPG
+|   |   |           
+|   |   \---raw-model-data
+|   |       +---BehaviorTree.CPP
+|   |       |   |   BehaviorTree_CPP_model_stats.xlsx
+|   |       |   |   
+|   |       |   \---BT-models
+|   |       |           Adlink-ROS_BT_ros2_bt_nav_mememan.xml
+|   |       |           Adlink-ROS_BT_ros2_bt_nav_mememan_interrupt.xml
+|   |       |           ajbandera_MiRON-project_ABR_test.xml
+|   |       |           alexandrethm_mecatro-P17_subtree_test.xml
+|   |       |           alexandrethm_mecatro-P17_Talk.xml
+|   |       |           alexandrethm_mecatro-P17_tree_big_robot.xml
+|   |       |           alexandrethm_mecatro-P17_tree_big_robot_purple.xml
+|   |       |           alexandrethm_mecatro-P17_tree_big_robot_yellow.xml
+|   |       |           alexandrethm_mecatro-P17_tree_dev_small_robot.xml
+|   |       |           alexandrethm_mecatro-P17_tree_homologation_score_big_robot_yellow.xml
+|   |       |           alexandrethm_mecatro-P17_tree_homologation_small_robot_purple.xml
+|   |       |           alexandrethm_mecatro-P17_tree_homologation_small_robot_yellow.xml
+|   |       |           alexandrethm_mecatro-P17_tree_small_robot.xml
+|   |       |           alexandrethm_mecatro-P17_tree_small_robot_test.xml
+|   |       |           CARVE-ROBMOSYS_BTCompiler_bt_groot.xml
+|   |       |           CARVE-ROBMOSYS_BTCompiler_bt_groot_1_1.xml
+|   |       |           CARVE-ROBMOSYS_BTCompiler_bt_groot_FAIL.xml
+|   |       |           CARVE-ROBMOSYS_BTCompiler_carve_use_case_1.xml
+|   |       |           CARVE-ROBMOSYS_BTCompiler_carve_use_case_2.xml
+|   |       |           CARVE-ROBMOSYS_BTCompiler_carve_use_case_3.xml
+|   |       |           CARVE-ROBMOSYS_BTCompiler_uc2.xml
+|   |       |           CARVE-ROBMOSYS_BTCompiler_uc3.xml
+|   |       |           CARVE-ROBMOSYS_carve-scenarios-config_Scenario2.xml
+|   |       |           CARVE-ROBMOSYS_Yarp-SmartSoft-Integration_bt_description.xml
+|   |       |           IntelligentRoboticsLabs_robocup2020_bt_receptionist.xml
+|   |       |           IntelligentRoboticsLabs_robocup2020_bt_serving_drinks.xml
+|   |       |           ipa-rar_pickplace_PickPlace_schunk.xml
+|   |       |           julienbayle_stardust_r1_bt.xml
+|   |       |           julienbayle_stardust_r2_bt.xml
+|   |       |           julienbayle_stardust_tests_bt.xml
+|   |       |           julienbayle_stardust_test_gripper.xml
+|   |       |           kmi-robots_hans-ros-supervisor_StateMachine.xml
+|   |       |           MiRON-project_bundles_main.xml
+|   |       |           MiRON-project_bundles_main_with_subtree.xml
+|   |       |           MiRON-project_bundles_test.xml
+|   |       |           MiRON-project_bundles_test_get_person.xml
+|   |       |           MiRON-project_bundles_variant_test.xml
+|   |       |           MROS-RobMoSys-ITP_Pilot-URJC_bt.xml
+|   |       |           MROS-RobMoSys-ITP_Pilot-URJC_navigate.xml
+|   |       |           ParthasarathyBana_behavior_tree_roscpp_test_tree.xml
+|   |       |           skylerpan_neuronbot2_multibot_chianghuang_bt.xml
+|   |       |           skylerpan_neuronbot2_multibot_multi_bt.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_behavior_trees_demo_1.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_behavior_trees_demo_2.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_behavior_trees_demo_face_pointer.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_behavior_trees_game_tree.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_behavior_trees_test_arm_routines.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_behavior_trees_test_cartesian.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_behavior_trees_test_speech.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_playground_cool_action.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_playground_fancy_bt.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_playground_forward.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_playground_hello_world.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_playground_nothing.xml
+|   |       |           vislab-tecnico-lisboa_vizzy_playground_security.xml
+|   |       |           
+|   |       \---py_trees_ros
+|   |           |   py_trees_ros_model_stats.xlsx
+|   |           |   
+|   |           \---BT-models
+|   |                   braineniac_robotics-player_trees.py
+|   |                   jotix16_Robotics-Behaviour-Planning_behaviours_student.py
+|   |                   jotix16_Robotics-Behaviour-Planning_bt_students.py
+|   |                   jotix16_Robotics-Behaviour-Planning_bt_students_probe.py
+|   |                   jotix16_Robotics-Behaviour-Planning_sm_students copy.py
+|   |                   KKalem_sam_march_reactive_seq.py
+|   |                   KKalem_sam_march_sam_emergency.py
+|   |                   KKalem_sam_march_sam_execute_mission.py
+|   |                   KKalem_sam_march_sam_tree_march.py
+|   |                   peterheim1_gizmo_five.py
+|   |                   peterheim1_gizmo_five_2.py
+|   |                   peterheim1_gizmo_five_3.py
+|   |                   peterheim1_gizmo_five_4.py
+|   |                   peterheim1_gizmo_five_a.py
+|   |                   peterheim1_gizmo_showtime.py
+|   |                   peterheim1_gizmo_two.py
+|   |                   peterheim1_gizmo_voice_test.py
+|   |                   refills-project_refills_second_review_arm_movement_behavior.py
+|   |                   refills-project_refills_second_review_base_navigation_behavior.py
+|   |                   refills-project_refills_second_review_brain.py
+|   |                   refills-project_refills_second_review_layer_detection_behavior.py
+|   |                   samiamlabs_dyno_drone_parcel_delivery.py
+|   |                   samiamlabs_dyno_drone_parcel_delivery_behaviours.py
+|   |                   samiamlabs_dyno_quadrotor.py
+|   |                   samiamlabs_dyno_route_scheduler.py
+|   |                   samiamlabs_dyno_route_scheduler_behaviours.py
+|   |                   simutisernestas_mobile_robot_project_bt_students.py
+|   |                   smarc-project_smarc_missions_behaviour_tree.py
+|   |                   smarc-project_smarc_missions_reactive_seq.py
+|   |                   smarc-project_smarc_missions_sam_emergency.py
+|   |                   smarc-project_smarc_missions_sam_execute_mission.py
+|   |                   smarc-project_smarc_missions_sam_tree_march.py
+|   |                   Taospirit_roborts_project_decision_node.py
+|   |                   
+|   \---state-machines-dataset
+|       |   folder_structure.txt
+|       |   README.md
+|       |   state-machines-sampled-projects.xlsx
+|       |   
+|       \---raw-model-data
+|           +---FlexBe
+|           |   |   flexbe_model_stats.xlsx
+|           |   |   
+|           |   \---SM-models
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_dual_arm_test_sm.py
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_dual_arm_test_sm.svg
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_example_behavior_sm.py
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_example_behavior_sm.svg
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_hand_eye_calibration_sm.py
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_hand_eye_calibration_sm.svg
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_manual_hand_eye_calibration_sm.py
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_manual_hand_eye_calibration_sm.svg
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_moveit_execution_test_sm.py
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_moveit_execution_test_sm.svg
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_scene_check_test_behavior_sm.py
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_scene_check_test_behavior_sm.svg
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_test_behaviors_sm.py
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_test_behaviors_sm.svg
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_three_arms_test_sm.py
+|           |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_three_arms_test_sm.svg
+|           |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_agv_place_sm.py
+|           |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_agv_place_sm.svg
+|           |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_binpicking_sm.py
+|           |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_binpicking_sm.svg
+|           |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_conveyorbelt_sm.py
+|           |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_conveyorbelt_sm.svg
+|           |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_conveyor_pickup_sm.py
+|           |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_conveyor_pickup_sm.svg
+|           |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_single_movement_sm.py
+|           |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_single_movement_sm.svg
+|           |           rigbetellabs_tortoisebot_waiter_tortoisebot_behaviors_tortoisebot_flexbe_behaviors_src_tortoisebot_flexbe_behaviors_example_behavior_sm.py
+|           |           rigbetellabs_tortoisebot_waiter_tortoisebot_behaviors_tortoisebot_flexbe_behaviors_src_tortoisebot_flexbe_behaviors_example_behavior_sm.svg
+|           |           rigbetellabs_tortoisebot_waiter_tortoisebot_behaviors_tortoisebot_flexbe_behaviors_src_tortoisebot_flexbe_behaviors_navigation_to_goal_sm.py
+|           |           rigbetellabs_tortoisebot_waiter_tortoisebot_behaviors_tortoisebot_flexbe_behaviors_src_tortoisebot_flexbe_behaviors_navigation_to_goal_sm.svg
+|           |           sweetie-bot-project_sweetie_bot_behavior_flexbe_sweetie_bot_soar_flexbe_behaviors_src_sweetie_bot_soar_flexbe_behaviors_executelookat_sm.py
+|           |           sweetie-bot-project_sweetie_bot_behavior_flexbe_sweetie_bot_soar_flexbe_behaviors_src_sweetie_bot_soar_flexbe_behaviors_executelookat_sm.svg
+|           |           tku-iarc_hand-eye-calibration_hand_eye_flexbe_behaviors_src_hand_eye_flexbe_behaviors_hand_eye_calibration_sm.py
+|           |           tku-iarc_hand-eye-calibration_hand_eye_flexbe_behaviors_src_hand_eye_flexbe_behaviors_hand_eye_calibration_sm.svg
+|           |           tku-iarc_hand-eye-calibration_hand_eye_flexbe_behaviors_src_hand_eye_flexbe_behaviors_manual_hand_eye_calibration_sm.py
+|           |           tku-iarc_hand-eye-calibration_hand_eye_flexbe_behaviors_src_hand_eye_flexbe_behaviors_manual_hand_eye_calibration_sm.svg
+|           |           
+|           \---SMACH
+|               |   smach_model_stats.xlsx
+|               |   
+|               \---SM-models
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_clean_house_smach.py
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_clean_house_smach.svg
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_monitor_fake_battery.py
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_monitor_fake_battery.svg
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach.py
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach.svg
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_callback.py
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_callback.svg
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_concurrence.py
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_concurrence.svg
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_iterator.py
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_iterator.svg
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_random_patrol_smach.py
+|                       Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_random_patrol_smach.svg
+|                       AUV-IITK_Anahita_master_layer_src_master_layer_state_mach.py
+|                       AUV-IITK_Anahita_master_layer_src_master_layer_state_mach.svg
+|                       AUV-IITK_Anahita_master_layer_src_master_layer_state_mach_gate_torpedo.py
+|                       AUV-IITK_Anahita_master_layer_src_master_layer_state_mach_gate_torpedo.svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_gate_codeState.py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_gate_codeState.svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_gate_or_postState.py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_gate_or_postState.svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_initializeState.py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_initializeState.svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_mission_completeState.py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_mission_completeState.svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_obstacle_avoidanceState.py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_obstacle_avoidanceState.svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_post_codeState.py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_post_codeState.svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_search_algorithm_for_QR_codeState.py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_search_algorithm_for_QR_codeState.svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_state_machine%20(copy).py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_state_machine%20(copy).svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_state_machine.py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_state_machine.svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_waypointState%20(copy).py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_waypointState%20(copy).svg
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_waypointState.py
+|                       CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_waypointState.svg
+|                       darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_patrol_smach.py
+|                       darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_patrol_smach.svg
+|                       darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_pysmach.py
+|                       darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_pysmach.svg
+|                       darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_testing_smach.py
+|                       darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_testing_smach.svg
+|                       darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_warehouse_patrol.py
+|                       darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_warehouse_patrol.svg
+|                       DeVinci-Innovation-Center_THEDRONELAB_ros_ws_build_stateMachine_catkin_generated_installspace_main.py
+|                       DeVinci-Innovation-Center_THEDRONELAB_ros_ws_build_stateMachine_catkin_generated_installspace_main.svg
+|                       DeVinci-Innovation-Center_THEDRONELAB_ros_ws_src_stateMachine_src_main.py
+|                       DeVinci-Innovation-Center_THEDRONELAB_ros_ws_src_stateMachine_src_main.svg
+|                       hentaihusinsya_wrs_2021_src_task_practice_1.py
+|                       hentaihusinsya_wrs_2021_src_task_practice_1.svg
+|                       hentaihusinsya_wrs_2021_src_wrs_2021_master.py
+|                       hentaihusinsya_wrs_2021_src_wrs_2021_master.svg
+|                       Luobokeng2021_Heihei_3rd_app_spark_teatask_spark_fetchtea_scripts_s_fetchtea.py
+|                       Luobokeng2021_Heihei_3rd_app_spark_teatask_spark_fetchtea_scripts_s_fetchtea.svg
+|                       Luobokeng2021_Heihei_spark_app_spark_carry_nodes_s_carry_object_nav.py
+|                       Luobokeng2021_Heihei_spark_app_spark_carry_nodes_s_carry_object_nav.svg
+|                       rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_contingency.py
+|                       rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_contingency.svg
+|                       rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_states.py
+|                       rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_states.svg
+|                       rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_state_machine_stage_1.py
+|                       rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_state_machine_stage_1.svg
+|                       tsoonjin_visionx_scripts_old_tasks_bins_task.py
+|                       tsoonjin_visionx_scripts_old_tasks_bins_task.svg
+|                       tsoonjin_visionx_scripts_old_tasks_lane_task.py
+|                       tsoonjin_visionx_scripts_old_tasks_lane_task.svg
+|                       tsoonjin_visionx_scripts_utils_smach_helper.py
+|                       tsoonjin_visionx_scripts_utils_smach_helper.svg
+|                       vibin18_kobuki-ros-nav_smach01.py
+|                       vibin18_kobuki-ros-nav_smach01.svg
+|                       vibin18_kobuki-ros-nav_smachTest.py
+|                       vibin18_kobuki-ros-nav_smachTest.svg
+|                       vibin18_kobuki-ros-nav_smatch01.py
+|                       vibin18_kobuki-ros-nav_smatch01.svg
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter.py
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter.svg
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple.py
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple.svg
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple_pt.py
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple_pt.svg
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple_pyglet_en.py
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple_pyglet_en.svg
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_pt.py
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_pt.svg
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_hand_shaker.py
+|                       vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_hand_shaker.svg
+|                       
++---commit-dates-extraction
+|       20012022_btcpp_RepoProjectNameHtmlCommitDates.csv
+|       20012022_flexbe_RepoProjectNameHtmlCommitDates.csv
+|       20012022_py_trees_RepoProjectNameHtmlCommitDates.csv
+|       20012022_py_trees_ros_RepoProjectNameHtmlCommitDates.csv
+|       20012022_smach_RepoProjectNameHtmlCommitDates.csv
+|       README.md
+|       
+\---scripts
+    |   2020-artifacts-instructions.pdf
+    |   LICENSE
+    |   README.md
+    |
+    +---2022-mining-and-filter-scripts
+    |       step1_repo-mining.py
+    |       step2_filter_repo_forks.py
+    |       step3_filter_repo_duplicates.py
+    |       step4_filter_repo_tool.py
+    |       step5_filter_repo_description.py
+    |       step5_filter_repo_name.py
+    |       step5_filter_repo_readme.py
+    |       step6_download_models.py
+    |
+    | 
+    \---2020-mining-notebooks
+    |   |   BT-mining-script.ipynb
+    |   |   BT_mining_script_for_testing.py
+    |   |   composite-node-counting.ipynb
+    |   |   README.md
+    |   |   test.py
+    |   |   
+    |   \---2020-rawdata
+    |       +---behaviortreecpp
+    |       |       Adlink-ROS_BT_ros2_bt_nav_mememan.xml
+    |       |       Adlink-ROS_BT_ros2_bt_nav_mememan_interrupt.xml
+    |       |       ajbandera_MiRON-project_ABR_test.xml
+    |       |       alexandrethm_mecatro-P17_subtree_test.xml
+    |       |       alexandrethm_mecatro-P17_Talk.xml
+    |       |       alexandrethm_mecatro-P17_tree_big_robot.xml
+    |       |       alexandrethm_mecatro-P17_tree_big_robot_purple.xml
+    |       |       alexandrethm_mecatro-P17_tree_big_robot_yellow.xml
+    |       |       alexandrethm_mecatro-P17_tree_dev_small_robot.xml
+    |       |       alexandrethm_mecatro-P17_tree_homologation_score_big_robot_yellow.xml
+    |       |       alexandrethm_mecatro-P17_tree_homologation_small_robot_purple.xml
+    |       |       alexandrethm_mecatro-P17_tree_homologation_small_robot_yellow.xml
+    |       |       alexandrethm_mecatro-P17_tree_small_robot.xml
+    |       |       alexandrethm_mecatro-P17_tree_small_robot_test.xml
+    |       |       CARVE-ROBMOSYS_BTCompiler_bt_groot.xml
+    |       |       CARVE-ROBMOSYS_BTCompiler_bt_groot_1_1.xml
+    |       |       CARVE-ROBMOSYS_BTCompiler_bt_groot_FAIL.xml
+    |       |       CARVE-ROBMOSYS_BTCompiler_carve_use_case_1.xml
+    |       |       CARVE-ROBMOSYS_BTCompiler_carve_use_case_2.xml
+    |       |       CARVE-ROBMOSYS_BTCompiler_carve_use_case_3.xml
+    |       |       CARVE-ROBMOSYS_BTCompiler_uc2.xml
+    |       |       CARVE-ROBMOSYS_BTCompiler_uc3.xml
+    |       |       CARVE-ROBMOSYS_carve-scenarios-config_Scenario2.xml
+    |       |       CARVE-ROBMOSYS_Yarp-SmartSoft-Integration_bt_description.xml
+    |       |       IntelligentRoboticsLabs_robocup2020_bt_receptionist.xml
+    |       |       IntelligentRoboticsLabs_robocup2020_bt_serving_drinks.xml
+    |       |       ipa-rar_pickplace_PickPlace_schunk.xml
+    |       |       julienbayle_stardust_r1_bt.xml
+    |       |       julienbayle_stardust_r2_bt.xml
+    |       |       julienbayle_stardust_tests_bt.xml
+    |       |       julienbayle_stardust_test_gripper.xml
+    |       |       kmi-robots_hans-ros-supervisor_StateMachine.xml
+    |       |       MiRON-project_bundles_main.xml
+    |       |       MiRON-project_bundles_main_with_subtree.xml
+    |       |       MiRON-project_bundles_test.xml
+    |       |       MiRON-project_bundles_test_get_person.xml
+    |       |       MiRON-project_bundles_variant_test.xml
+    |       |       MROS-RobMoSys-ITP_Pilot-URJC_bt.xml
+    |       |       MROS-RobMoSys-ITP_Pilot-URJC_navigate.xml
+    |       |       ParthasarathyBana_behavior_tree_roscpp_test_tree.xml
+    |       |       skylerpan_neuronbot2_multibot_chianghuang_bt.xml
+    |       |       skylerpan_neuronbot2_multibot_multi_bt.xml
+    |       |       vislab-tecnico-lisboa_vizzy_behavior_trees_demo_1.xml
+    |       |       vislab-tecnico-lisboa_vizzy_behavior_trees_demo_2.xml
+    |       |       vislab-tecnico-lisboa_vizzy_behavior_trees_demo_face_pointer.xml
+    |       |       vislab-tecnico-lisboa_vizzy_behavior_trees_game_tree.xml
+    |       |       vislab-tecnico-lisboa_vizzy_behavior_trees_test_arm_routines.xml
+    |       |       vislab-tecnico-lisboa_vizzy_behavior_trees_test_cartesian.xml
+    |       |       vislab-tecnico-lisboa_vizzy_behavior_trees_test_speech.xml
+    |       |       vislab-tecnico-lisboa_vizzy_playground_cool_action.xml
+    |       |       vislab-tecnico-lisboa_vizzy_playground_fancy_bt.xml
+    |       |       vislab-tecnico-lisboa_vizzy_playground_forward.xml
+    |       |       vislab-tecnico-lisboa_vizzy_playground_hello_world.xml
+    |       |       vislab-tecnico-lisboa_vizzy_playground_nothing.xml
+    |       |       vislab-tecnico-lisboa_vizzy_playground_security.xml
+    |       |       
+    |       \---pytreeros
+    |               braineniac_robotics-player_trees.py
+    |               jotix16_Robotics-Behaviour-Planning_behaviours_student.py
+    |               jotix16_Robotics-Behaviour-Planning_bt_students.py
+    |               jotix16_Robotics-Behaviour-Planning_bt_students_probe.py
+    |               jotix16_Robotics-Behaviour-Planning_sm_students copy.py
+    |               KKalem_sam_march_reactive_seq.py
+    |               KKalem_sam_march_sam_emergency.py
+    |               KKalem_sam_march_sam_execute_mission.py
+    |               KKalem_sam_march_sam_tree_march.py
+    |               peterheim1_gizmo_five.py
+    |               peterheim1_gizmo_five_2.py
+    |               peterheim1_gizmo_five_3.py
+    |               peterheim1_gizmo_five_4.py
+    |               peterheim1_gizmo_five_a.py
+    |               peterheim1_gizmo_showtime.py
+    |               peterheim1_gizmo_two.py
+    |               peterheim1_gizmo_voice_test.py
+    |               refills-project_refills_second_review_arm_movement_behavior.py
+    |               refills-project_refills_second_review_base_navigation_behavior.py
+    |               refills-project_refills_second_review_brain.py
+    |               refills-project_refills_second_review_layer_detection_behavior.py
+    |               samiamlabs_dyno_drone_parcel_delivery.py
+    |               samiamlabs_dyno_drone_parcel_delivery_behaviours.py
+    |               samiamlabs_dyno_quadrotor.py
+    |               samiamlabs_dyno_route_scheduler.py
+    |               samiamlabs_dyno_route_scheduler_behaviours.py
+    |               simutisernestas_mobile_robot_project_bt_students.py
+    |               smarc-project_smarc_missions_behaviour_tree.py
+    |               smarc-project_smarc_missions_reactive_seq.py
+    |               smarc-project_smarc_missions_sam_emergency.py
+    |               smarc-project_smarc_missions_sam_execute_mission.py
+    |               smarc-project_smarc_missions_sam_tree_march.py
+    |               Taospirit_roborts_project_decision_node.py              
+    
+            

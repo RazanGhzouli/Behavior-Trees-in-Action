@@ -1,0 +1,142 @@
+\BEHAVIOR-TREES-IN-ACTION\2022-SAMPLED-DATASET\STATE-MACHINES-DATASET
+|   folder_structure.txt
+|   README.md
+|   state-machines-sampled-projects.xlsx
+|   
+\---raw-model-data
+    +---FlexBe
+    |   |   flexbe_model_stats.xlsx
+    |   |   
+    |   \---SM-models
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_dual_arm_test_sm.py
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_dual_arm_test_sm.svg
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_example_behavior_sm.py
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_example_behavior_sm.svg
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_hand_eye_calibration_sm.py
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_hand_eye_calibration_sm.svg
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_manual_hand_eye_calibration_sm.py
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_manual_hand_eye_calibration_sm.svg
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_moveit_execution_test_sm.py
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_moveit_execution_test_sm.svg
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_scene_check_test_behavior_sm.py
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_scene_check_test_behavior_sm.svg
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_test_behaviors_sm.py
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_test_behaviors_sm.svg
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_three_arms_test_sm.py
+    |           andy-Chien_dcma_flexbe_test_flexbe_behaviors_src_test_flexbe_behaviors_three_arms_test_sm.svg
+    |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_agv_place_sm.py
+    |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_agv_place_sm.svg
+    |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_binpicking_sm.py
+    |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_binpicking_sm.svg
+    |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_conveyorbelt_sm.py
+    |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_conveyorbelt_sm.svg
+    |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_conveyor_pickup_sm.py
+    |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_conveyor_pickup_sm.svg
+    |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_single_movement_sm.py
+    |           QuiN-cy_ROS_Test_ws_src_Binpick_binpicking_behaviors_binpicking_flexbe_behaviors_src_binpicking_flexbe_behaviors_single_movement_sm.svg
+    |           rigbetellabs_tortoisebot_waiter_tortoisebot_behaviors_tortoisebot_flexbe_behaviors_src_tortoisebot_flexbe_behaviors_example_behavior_sm.py
+    |           rigbetellabs_tortoisebot_waiter_tortoisebot_behaviors_tortoisebot_flexbe_behaviors_src_tortoisebot_flexbe_behaviors_example_behavior_sm.svg
+    |           rigbetellabs_tortoisebot_waiter_tortoisebot_behaviors_tortoisebot_flexbe_behaviors_src_tortoisebot_flexbe_behaviors_navigation_to_goal_sm.py
+    |           rigbetellabs_tortoisebot_waiter_tortoisebot_behaviors_tortoisebot_flexbe_behaviors_src_tortoisebot_flexbe_behaviors_navigation_to_goal_sm.svg
+    |           sweetie-bot-project_sweetie_bot_behavior_flexbe_sweetie_bot_soar_flexbe_behaviors_src_sweetie_bot_soar_flexbe_behaviors_executelookat_sm.py
+    |           sweetie-bot-project_sweetie_bot_behavior_flexbe_sweetie_bot_soar_flexbe_behaviors_src_sweetie_bot_soar_flexbe_behaviors_executelookat_sm.svg
+    |           tku-iarc_hand-eye-calibration_hand_eye_flexbe_behaviors_src_hand_eye_flexbe_behaviors_hand_eye_calibration_sm.py
+    |           tku-iarc_hand-eye-calibration_hand_eye_flexbe_behaviors_src_hand_eye_flexbe_behaviors_hand_eye_calibration_sm.svg
+    |           tku-iarc_hand-eye-calibration_hand_eye_flexbe_behaviors_src_hand_eye_flexbe_behaviors_manual_hand_eye_calibration_sm.py
+    |           tku-iarc_hand-eye-calibration_hand_eye_flexbe_behaviors_src_hand_eye_flexbe_behaviors_manual_hand_eye_calibration_sm.svg
+    |           
+    \---SMACH
+        |   smach_model_stats.xlsx
+        |   
+        \---SM-models
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_clean_house_smach.py
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_clean_house_smach.svg
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_monitor_fake_battery.py
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_monitor_fake_battery.svg
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach.py
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach.svg
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_callback.py
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_callback.svg
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_concurrence.py
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_concurrence.svg
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_iterator.py
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_patrol_smach_iterator.svg
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_random_patrol_smach.py
+                Art-robot0_omniWheelCareRobot-usual_rosCode_src_carebot_tasks_nodes_random_patrol_smach.svg
+                AUV-IITK_Anahita_master_layer_src_master_layer_state_mach.py
+                AUV-IITK_Anahita_master_layer_src_master_layer_state_mach.svg
+                AUV-IITK_Anahita_master_layer_src_master_layer_state_mach_gate_torpedo.py
+                AUV-IITK_Anahita_master_layer_src_master_layer_state_mach_gate_torpedo.svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_gate_codeState.py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_gate_codeState.svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_gate_or_postState.py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_gate_or_postState.svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_initializeState.py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_initializeState.svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_mission_completeState.py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_mission_completeState.svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_obstacle_avoidanceState.py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_obstacle_avoidanceState.svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_post_codeState.py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_post_codeState.svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_search_algorithm_for_QR_codeState.py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_search_algorithm_for_QR_codeState.svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_state_machine%20(copy).py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_state_machine%20(copy).svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_state_machine.py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_state_machine.svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_waypointState%20(copy).py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_waypointState%20(copy).svg
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_waypointState.py
+                CSULA-URC_CSULA-URC-2020-21_StateMachine_UserInput_waypointState.svg
+                darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_patrol_smach.py
+                darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_patrol_smach.svg
+                darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_pysmach.py
+                darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_pysmach.svg
+                darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_testing_smach.py
+                darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_testing_smach.svg
+                darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_warehouse_patrol.py
+                darshan-kt_rbcar_rsband_rbcar_common_rbcar_navigation_scripts_smach_warehouse_patrol.svg
+                DeVinci-Innovation-Center_THEDRONELAB_ros_ws_build_stateMachine_catkin_generated_installspace_main.py
+                DeVinci-Innovation-Center_THEDRONELAB_ros_ws_build_stateMachine_catkin_generated_installspace_main.svg
+                DeVinci-Innovation-Center_THEDRONELAB_ros_ws_src_stateMachine_src_main.py
+                DeVinci-Innovation-Center_THEDRONELAB_ros_ws_src_stateMachine_src_main.svg
+                hentaihusinsya_wrs_2021_src_task_practice_1.py
+                hentaihusinsya_wrs_2021_src_task_practice_1.svg
+                hentaihusinsya_wrs_2021_src_wrs_2021_master.py
+                hentaihusinsya_wrs_2021_src_wrs_2021_master.svg
+                Luobokeng2021_Heihei_3rd_app_spark_teatask_spark_fetchtea_scripts_s_fetchtea.py
+                Luobokeng2021_Heihei_3rd_app_spark_teatask_spark_fetchtea_scripts_s_fetchtea.svg
+                Luobokeng2021_Heihei_spark_app_spark_carry_nodes_s_carry_object_nav.py
+                Luobokeng2021_Heihei_spark_app_spark_carry_nodes_s_carry_object_nav.svg
+                rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_contingency.py
+                rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_contingency.svg
+                rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_states.py
+                rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_states.svg
+                rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_state_machine_stage_1.py
+                rcxking_wpi_sample_return_challenge_2015_rockie_workspace_src_rockie_core_src_state_machine_stage_1.svg
+                tsoonjin_visionx_scripts_old_tasks_bins_task.py
+                tsoonjin_visionx_scripts_old_tasks_bins_task.svg
+                tsoonjin_visionx_scripts_old_tasks_lane_task.py
+                tsoonjin_visionx_scripts_old_tasks_lane_task.svg
+                tsoonjin_visionx_scripts_utils_smach_helper.py
+                tsoonjin_visionx_scripts_utils_smach_helper.svg
+                vibin18_kobuki-ros-nav_smach01.py
+                vibin18_kobuki-ros-nav_smach01.svg
+                vibin18_kobuki-ros-nav_smachTest.py
+                vibin18_kobuki-ros-nav_smachTest.svg
+                vibin18_kobuki-ros-nav_smatch01.py
+                vibin18_kobuki-ros-nav_smatch01.svg
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter.py
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter.svg
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple.py
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple.svg
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple_pt.py
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple_pt.svg
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple_pyglet_en.py
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_promoter_simple_pyglet_en.svg
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_pt.py
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_exercise_pt.svg
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_hand_shaker.py
+                vislab-tecnico-lisboa_vizzy_vizzy_behaviour_scripts_hand_shaker.svg
+                

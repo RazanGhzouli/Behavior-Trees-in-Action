@@ -1,0 +1,116 @@
+\BEHAVIOR-TREES-IN-ACTION\SCRIPTS
+|   2020-artifacts-instructions.pdf
+|   folder_structure.txt
+|   LICENSE
+|   README.md
+|   
++---2020-mining-notebooks
+|   |   BT-mining-script.ipynb
+|   |   BT_mining_script_for_testing.py
+|   |   composite-node-counting.ipynb
+|   |   README.md
+|   |   test.py
+|   |   
+|   \---2020-rawdata
+|       +---behaviortreecpp
+|       |       Adlink-ROS_BT_ros2_bt_nav_mememan.xml
+|       |       Adlink-ROS_BT_ros2_bt_nav_mememan_interrupt.xml
+|       |       ajbandera_MiRON-project_ABR_test.xml
+|       |       alexandrethm_mecatro-P17_subtree_test.xml
+|       |       alexandrethm_mecatro-P17_Talk.xml
+|       |       alexandrethm_mecatro-P17_tree_big_robot.xml
+|       |       alexandrethm_mecatro-P17_tree_big_robot_purple.xml
+|       |       alexandrethm_mecatro-P17_tree_big_robot_yellow.xml
+|       |       alexandrethm_mecatro-P17_tree_dev_small_robot.xml
+|       |       alexandrethm_mecatro-P17_tree_homologation_score_big_robot_yellow.xml
+|       |       alexandrethm_mecatro-P17_tree_homologation_small_robot_purple.xml
+|       |       alexandrethm_mecatro-P17_tree_homologation_small_robot_yellow.xml
+|       |       alexandrethm_mecatro-P17_tree_small_robot.xml
+|       |       alexandrethm_mecatro-P17_tree_small_robot_test.xml
+|       |       CARVE-ROBMOSYS_BTCompiler_bt_groot.xml
+|       |       CARVE-ROBMOSYS_BTCompiler_bt_groot_1_1.xml
+|       |       CARVE-ROBMOSYS_BTCompiler_bt_groot_FAIL.xml
+|       |       CARVE-ROBMOSYS_BTCompiler_carve_use_case_1.xml
+|       |       CARVE-ROBMOSYS_BTCompiler_carve_use_case_2.xml
+|       |       CARVE-ROBMOSYS_BTCompiler_carve_use_case_3.xml
+|       |       CARVE-ROBMOSYS_BTCompiler_uc2.xml
+|       |       CARVE-ROBMOSYS_BTCompiler_uc3.xml
+|       |       CARVE-ROBMOSYS_carve-scenarios-config_Scenario2.xml
+|       |       CARVE-ROBMOSYS_Yarp-SmartSoft-Integration_bt_description.xml
+|       |       IntelligentRoboticsLabs_robocup2020_bt_receptionist.xml
+|       |       IntelligentRoboticsLabs_robocup2020_bt_serving_drinks.xml
+|       |       ipa-rar_pickplace_PickPlace_schunk.xml
+|       |       julienbayle_stardust_r1_bt.xml
+|       |       julienbayle_stardust_r2_bt.xml
+|       |       julienbayle_stardust_tests_bt.xml
+|       |       julienbayle_stardust_test_gripper.xml
+|       |       kmi-robots_hans-ros-supervisor_StateMachine.xml
+|       |       MiRON-project_bundles_main.xml
+|       |       MiRON-project_bundles_main_with_subtree.xml
+|       |       MiRON-project_bundles_test.xml
+|       |       MiRON-project_bundles_test_get_person.xml
+|       |       MiRON-project_bundles_variant_test.xml
+|       |       MROS-RobMoSys-ITP_Pilot-URJC_bt.xml
+|       |       MROS-RobMoSys-ITP_Pilot-URJC_navigate.xml
+|       |       ParthasarathyBana_behavior_tree_roscpp_test_tree.xml
+|       |       skylerpan_neuronbot2_multibot_chianghuang_bt.xml
+|       |       skylerpan_neuronbot2_multibot_multi_bt.xml
+|       |       vislab-tecnico-lisboa_vizzy_behavior_trees_demo_1.xml
+|       |       vislab-tecnico-lisboa_vizzy_behavior_trees_demo_2.xml
+|       |       vislab-tecnico-lisboa_vizzy_behavior_trees_demo_face_pointer.xml
+|       |       vislab-tecnico-lisboa_vizzy_behavior_trees_game_tree.xml
+|       |       vislab-tecnico-lisboa_vizzy_behavior_trees_test_arm_routines.xml
+|       |       vislab-tecnico-lisboa_vizzy_behavior_trees_test_cartesian.xml
+|       |       vislab-tecnico-lisboa_vizzy_behavior_trees_test_speech.xml
+|       |       vislab-tecnico-lisboa_vizzy_playground_cool_action.xml
+|       |       vislab-tecnico-lisboa_vizzy_playground_fancy_bt.xml
+|       |       vislab-tecnico-lisboa_vizzy_playground_forward.xml
+|       |       vislab-tecnico-lisboa_vizzy_playground_hello_world.xml
+|       |       vislab-tecnico-lisboa_vizzy_playground_nothing.xml
+|       |       vislab-tecnico-lisboa_vizzy_playground_security.xml
+|       |       
+|       \---pytreeros
+|               braineniac_robotics-player_trees.py
+|               jotix16_Robotics-Behaviour-Planning_behaviours_student.py
+|               jotix16_Robotics-Behaviour-Planning_bt_students.py
+|               jotix16_Robotics-Behaviour-Planning_bt_students_probe.py
+|               jotix16_Robotics-Behaviour-Planning_sm_students copy.py
+|               KKalem_sam_march_reactive_seq.py
+|               KKalem_sam_march_sam_emergency.py
+|               KKalem_sam_march_sam_execute_mission.py
+|               KKalem_sam_march_sam_tree_march.py
+|               peterheim1_gizmo_five.py
+|               peterheim1_gizmo_five_2.py
+|               peterheim1_gizmo_five_3.py
+|               peterheim1_gizmo_five_4.py
+|               peterheim1_gizmo_five_a.py
+|               peterheim1_gizmo_showtime.py
+|               peterheim1_gizmo_two.py
+|               peterheim1_gizmo_voice_test.py
+|               refills-project_refills_second_review_arm_movement_behavior.py
+|               refills-project_refills_second_review_base_navigation_behavior.py
+|               refills-project_refills_second_review_brain.py
+|               refills-project_refills_second_review_layer_detection_behavior.py
+|               samiamlabs_dyno_drone_parcel_delivery.py
+|               samiamlabs_dyno_drone_parcel_delivery_behaviours.py
+|               samiamlabs_dyno_quadrotor.py
+|               samiamlabs_dyno_route_scheduler.py
+|               samiamlabs_dyno_route_scheduler_behaviours.py
+|               simutisernestas_mobile_robot_project_bt_students.py
+|               smarc-project_smarc_missions_behaviour_tree.py
+|               smarc-project_smarc_missions_reactive_seq.py
+|               smarc-project_smarc_missions_sam_emergency.py
+|               smarc-project_smarc_missions_sam_execute_mission.py
+|               smarc-project_smarc_missions_sam_tree_march.py
+|               Taospirit_roborts_project_decision_node.py
+|               
+\---2022-mining-and-filter-scripts
+        step1_repo-mining.py
+        step2_filter_repo_forks.py
+        step3_filter_repo_duplicates.py
+        step4_filter_repo_tool.py
+        step5_filter_repo_description.py
+        step5_filter_repo_name.py
+        step5_filter_repo_readme.py
+        step6_download_models.py
+        
