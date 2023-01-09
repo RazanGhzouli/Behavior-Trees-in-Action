@@ -1,6 +1,10 @@
 # README #
 
 
+
+[![DOI](https://zenodo.org/badge/296105377.svg)](https://zenodo.org/badge/latestdoi/296105377)
+
+
 ### What is this repository for? ###
 
 This online Appendix is for the papers:
