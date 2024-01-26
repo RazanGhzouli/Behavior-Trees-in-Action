@@ -9,7 +9,7 @@
 
 This online Appendix is for the papers:
 
-- (paper A) Behavior Trees and State Machines in Robotics Applications (https://doi.org/10.48550/arXiv.2208.04211) currently under submission and waiting revision;
+- (paper A) Behavior Trees and State Machines in Robotics Applications (https://ieeexplore.ieee.org/abstract/document/10106642);
 
 - (paper B) Behavior Trees in Action: A Study of Robotics Applications (https://dl.acm.org/doi/10.1145/3426425.3426942).
 
