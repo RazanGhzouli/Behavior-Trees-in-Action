@@ -26,7 +26,7 @@ For the statistics that are aggregated and presented in both papers, we provide 
 
 ### Who do I talk to? ###
 
-* Razan Ghzouli (razan.ghzouli@chalmers.se)
+* Razan Ghzouli razan.ghzouli@chalmers.se
 
 
 
