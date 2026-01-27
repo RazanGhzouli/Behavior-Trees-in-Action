@@ -7,11 +7,13 @@
 
 ### What is this repository for? ###
 
-This online Appendix is for the papers:
+This dataset of behavior trees and state machines is an online appendix for the following papers. Please cite paper A if you use or analyze the dataset.
 
-- (paper A) Behavior Trees and State Machines in Robotics Applications (https://ieeexplore.ieee.org/abstract/document/10106642);
+    (paper A) Behavior Trees and State Machines in Robotics Applications (https://doi.org/10.1109/TSE.2023.3269081), published at IEEE Transaction in Software Engineering (TSE), archived version available at https://www.cse.chalmers.se/~bergert/paper/2023-tse-behaviortrees.pdf
 
-- (paper B) Behavior Trees in Action: A Study of Robotics Applications (https://dl.acm.org/doi/10.1145/3426425.3426942).
+    (paper B) Behavior Trees in Action: A Study of Robotics Applications (https://dl.acm.org/doi/10.1145/3426425.3426942).
+
+
 
 The same information can be found in our Bitbucket repository as well (https://bitbucket.org/easelab/behaviortrees).
 
@@ -27,6 +29,8 @@ For the statistics that are aggregated and presented in both papers, we provide 
 ### Who do I talk to? ###
 
 * Razan Ghzouli razan.ghzouli@chalmers.se
-
+* Thorsten Berger (thorsten.berger@rub.de)
+* Andrzej Wasowski (wasowski@itu.dk)
+* Einar Broch Johnsen (einarj@ifi.uio.no)
 
 
